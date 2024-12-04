@@ -1,0 +1,44 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(45deg, #333, #555);
+  padding: 10px 20px;
+  width: 90%;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffcc00; 
+  margin-right: auto;
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 40px; 
+  flex-grow: 1; 
+  justify-content: center;
+}
+
+.links li button {
+  background-color: transparent; 
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: normal;
+  border: 2px solid transparent;
+  padding: 10px 20px;
+  cursor: pointer; 
+  transition: color 0.3s, border-color 0.3s, transform 0.3s; 
+}
+
+.links li button:hover {
+  color: #ffcc00;
+  transform: scale(1.1);
+}
+
+.links li button:focus {
+  outline: none;
+}

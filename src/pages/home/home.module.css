@@ -1,0 +1,63 @@
+.title {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically (if parent has height) */
+  text-align: center; /* Centers text inside the element */
+  margin: 20px auto; /* Centers the div with margin */
+  padding: 20px; /* Adds spacing inside the div */
+}
+
+
+
+.title h1 {
+  font-size: 3rem; /* Large font size */
+  font-weight: bold; /* Makes text bold */
+  color: #ffffff; /* Vibrant text color */
+  letter-spacing: 1.5px; /* Adds spacing between letters */
+  line-height: 1.2; /* Adjusts line height */
+}
+
+
+.carousel {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  gap: 0px;
+  position: absolute;
+  bottom: 0px;
+  left : 60px;
+  place-items: center;  
+  width: 95%;
+  height: 220px;
+}
+
+.movie {
+  flex-shrink: 0;
+  text-align: center;
+  padding-left: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.featured {
+  transform: scale(1.4);
+  transform-origin: center center;
+}
+
+
+.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+.movie img {
+  width: 100%;
+  height: auto;
+  max-width: 95px;
+}

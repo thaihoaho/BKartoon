@@ -1,0 +1,12 @@
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(45deg, #333, #555);
+  }
+  
+  .content {
+    flex: 1;  
+    background: linear-gradient(45deg, #111111, #3f3f3f);
+  }
+  

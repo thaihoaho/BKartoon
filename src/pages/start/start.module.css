@@ -1,0 +1,92 @@
+.title {
+  display: flex;
+  justify-content: space-between;
+  padding-left : 90px;
+  padding-right : 140px;
+  padding-top : 25px;
+
+}
+
+.title h1 {
+  font-size: 2.6rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  background-clip:border-box;
+  -webkit-background-clip: text;
+  color: transparent;
+  
+}
+
+.title button {
+  height: 3rem;
+  padding: 0px 25px;
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  margin-left: 15px;
+  margin-top : 10px;
+}
+
+.title button:hover {
+  background: linear-gradient(45deg, #ffcc00, #ff6600);
+  transform: scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.title button:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.carousel {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  gap: 0px;
+  position: absolute;
+  bottom: 0px;
+  left: 100px;
+  place-items: center;
+  width: 80%;
+  height: 220px;
+}
+
+.movie {
+  flex-shrink: 0;
+  text-align: center;
+  padding-left: 40px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.featured {
+  transform: scale(1.4);
+  transform-origin: center center;
+}
+
+
+.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+.movie img {
+  width: 100%;
+  height: auto;
+  max-width: 95px;
+}
