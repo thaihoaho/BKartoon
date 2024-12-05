@@ -1,0 +1,160 @@
+/* Main container */
+.page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    /* Sáng hơn */
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Page title */
+.pageTitle {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2c3e50;
+    /* Xanh đậm */
+}
+
+/* Container for the form */
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form styling */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Form groups */
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-weight: bold;
+    color: #34495e;
+    /* Xám xanh đậm */
+}
+
+/* Input, textarea, and select styling */
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+    padding: 12px;
+    border: 1px solid #bdc3c7;
+    /* Xám nhạt */
+    border-radius: 5px;
+    font-size: 16px;
+    width: 95%;
+    background-color: #ecf0f1;
+    /* Xám sáng */
+    color: #34495e;
+    /* Màu chữ khi người dùng nhập vào (Xám xanh đậm) */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Placeholder text color */
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: #95a5a6;
+    /* Màu chữ placeholder (Xám nhạt) */
+    font-style: italic;
+}
+
+/* Focus styles */
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+    border-color: #3498db;
+    /* Xanh nước biển nhạt */
+    box-shadow: 0 0 6px rgba(52, 152, 219, 0.6);
+    outline: none;
+}
+
+/* Textarea customization */
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Submit button styling */
+.submitButton {
+    padding: 14px;
+    background-color: #1abc9c;
+    /* Xanh lá nhẹ */
+    color: #ffffff;
+    /* Trắng */
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #16a085;
+    /* Xanh lá đậm hơn */
+}
+
+.submitButton:active {
+    background-color: #148f77;
+    /* Xanh lá đậm */
+}
+
+/* Back button styling */
+.backButton {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    /* Đỏ nhạt */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.backButton:hover {
+    background-color: #c0392b;
+    /* Đỏ đậm hơn */
+}
+
+.backButton:active {
+    background-color: #a93226;
+    /* Đỏ đậm */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .page {
+        padding: 15px;
+    }
+
+    .pageTitle {
+        font-size: 24px;
+    }
+
+    .submitButton {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .backButton {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

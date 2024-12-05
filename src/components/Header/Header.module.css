@@ -1,0 +1,49 @@
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--background-color);
+    padding: 0 1rem;
+}
+
+.menuButton {
+    display: none;
+}
+
+.menuIcon {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+.srOnly {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.titleContainer {
+    flex: 1;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 2.75rem;
+}
+
+@media (max-width: 1024px) {
+    .menuButton {
+        display: block;
+    }
+}
