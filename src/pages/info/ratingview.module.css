@@ -1,0 +1,44 @@
+.reviewCard {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.userInfo {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.avatar {
+    border-radius: 50%;
+}
+
+.username {
+    color: #5d9cec;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.rating {
+    color: #e6c75c;
+    font-size: 0.875rem;
+}
+
+.date {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.content {
+    line-height: 1.6;
+}

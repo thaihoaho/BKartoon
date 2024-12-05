@@ -1,0 +1,53 @@
+.form {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.ratingInput,
+.commentInput {
+    margin-bottom: 15px;
+}
+
+.ratingInput label,
+.commentInput label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.ratingInput input,
+.commentInput textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.commentInput textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.submitButton {
+    background-color: #2b2d42;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: #4a4a4a;
+}

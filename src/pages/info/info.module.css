@@ -1,0 +1,161 @@
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+.header {
+    margin-bottom: 40px;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.mainContent {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 30px;
+}
+
+.posterSection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.poster {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.score {
+    background: #2b2d42;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.scoreLabel {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.scoreValue {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.userCount {
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.ratingButton {
+    background-color: #4a4a4a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.ratingButton:hover {
+    background-color: #2b2d42;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.infoSection h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #2b2d42;
+    border-bottom: 2px solid #2b2d42;
+    padding-bottom: 5px;
+}
+
+.description p {
+    line-height: 1.6;
+}
+
+.information dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+}
+
+.information dt {
+    font-weight: bold;
+}
+
+.characters ul,
+.author p,
+.studio p {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.characters li,
+.author p,
+.studio p {
+    padding: 5px 0;
+}
+
+.reviews {
+    margin-top: 40px;
+    background: #222;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.reviewsHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.writeReviewButton {
+    background: #2b2d42;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.writeReviewButton:hover {
+    background: #3d3f54;
+}
+
+.reviewsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .mainContent {
+        grid-template-columns: 1fr;
+    }
+
+    .posterSection {
+        max-width: 250px;
+        margin: 0 auto;
+    }
+}
