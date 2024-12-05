@@ -1,0 +1,113 @@
+.sidebar {
+    width: 100%;
+    height: 100%;
+}
+
+.content {
+    padding: 1rem;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+}
+
+.filmIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+}
+
+.button:hover {
+    background-color: var(--hover-color);
+}
+
+.active {
+    background-color: var(--active-color);
+}
+
+.icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.iconSky {
+    color: #0ea5e9;
+}
+
+.iconViolet {
+    color: #8b5cf6;
+}
+
+.iconPink {
+    color: #be185d;
+}
+
+.mobileSidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    display: none;
+}
+
+.mobileSidebar.open {
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mobileSidebar .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18rem;
+    height: 100%;
+    background-color: var(--background-color);
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .mobileSidebar {
+        display: none;
+    }
+}

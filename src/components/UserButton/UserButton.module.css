@@ -1,0 +1,67 @@
+.userButton {
+    position: relative;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.userIcon {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    width: 14rem;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.userButton:hover .dropdown {
+    display: block;
+}
+
+.userInfo {
+    margin-bottom: 0.5rem;
+}
+
+.userName {
+    font-weight: 500;
+}
+
+.userEmail {
+    font-size: 0.875rem;
+    color: var(--muted-color);
+}
+
+.separator {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.logoutButton {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem 0;
+}
+
+.logoutButton:hover {
+    background-color: var(--hover-color);
+}
