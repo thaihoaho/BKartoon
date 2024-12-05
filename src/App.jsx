@@ -4,6 +4,7 @@ import DefaultLayout from "./components/layout/DefaultLayout.jsx";
 import Start from "./pages/start/start.jsx";
 import Login from "./pages/auth/signin.jsx";
 import Signup from "./pages/auth/signup.jsx";
+import MovieList from "./pages/movielist/movielist.jsx";
 function App() {
 
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path='/signin' element={<Login></Login>} />
         <Route path='/signup' element={<Signup></Signup>} />
         <Route path='/home' element={<DefaultLayout><Home></Home></DefaultLayout>} />
-
+        <Route path='/all' element={<DefaultLayout><MovieList></MovieList></DefaultLayout>} />
 
       </Routes>
   )

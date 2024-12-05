@@ -1,0 +1,53 @@
+.movie-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgb(0, 0, 0);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 10px;
+  transition: transform 0.3s ease;
+  height: 200px;
+  width : 130px;
+}
+
+
+.movie-card:hover {
+  transform: scale(1.1);
+}
+
+.movie-poster {
+  height: 100%;
+}
+
+.movie-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;  
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  text-align: center;
+  padding: 10px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.movie-card:hover .movie-info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.movie-year {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 5px 0 0;
+}

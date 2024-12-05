@@ -16,8 +16,8 @@ const NavBar = () => {
       <div className={clx('logo')}>BKartoon</div>
       <ul className={clx('links')}>
         <li><button onClick={() => handleNavigation('/home')}>Trang chủ</button></li>
-        <li><button onClick={() => handleNavigation('/Tất cả phim')}>Tất cả phim</button></li>
-        <li><button onClick={() => handleNavigation('/Liên hệ')}>Liên hệ</button></li>
+        <li><button onClick={() => handleNavigation('/all')}>Tất cả phim</button></li>
+        <li><button onClick={() => handleNavigation('/contact')}>Liên hệ</button></li>
       </ul>
     </nav>
   );
