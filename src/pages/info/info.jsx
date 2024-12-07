@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import styles from './info.module.css'
 import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react'
 import RatingForm from './ratingform'
+import { Flame } from 'lucide-react'
 
 const cx = classNames.bind(styles);
 
@@ -11,6 +12,44 @@ const cx = classNames.bind(styles);
 export default function MovieDetails() {
   const [showRatingForm, setShowRatingForm] = useState(false)
 
+  const characters = [
+    {
+      character: {
+        name: "Ayase, Momo",
+        role: "Main",
+        image: "src/assets/user.png"
+      },
+      actor: {
+        name: "Wakayama, Shion",
+        language: "Japanese",
+        image: "src/assets/user.png"
+      }
+    },
+    {
+      character: {
+        name: "Takakura, Ken",
+        role: "Main", 
+        image: "src/assets/user.png"
+      },
+      actor: {
+        name: "Hanae, Natsuki",
+        language: "Japanese",
+        image: "src/assets/user.png"
+      }
+    },
+    {
+      character: {
+        name: "Shiratori, Aira",
+        role: "Supporting",
+        image: "src/assets/user.png"
+      },
+      actor: {
+        name: "Sakura, Ayane",
+        language: "Japanese",
+        image: "src/assets/user.png"
+      }
+    }
+  ]
 
   return (
     <div className={cx('container')}>
@@ -23,6 +62,10 @@ export default function MovieDetails() {
             height={450}
             className={cx('poster')}
           />
+          <div className={cx('ratingLevel')}>
+            <Flame className={cx('flameIcon')} />
+          <span>Average</span>
+          </div>
           <div className={cx('rating')}>
             <div className={cx('ratingScore')}>
               <Star className={cx('starIcon')} />
@@ -34,7 +77,7 @@ export default function MovieDetails() {
         </div>
 
         <div className={cx('infoSection')}>
-          <h1 className={cx('title')}>Dandadan</h1>
+          <h1 className={cx('title')}>Conan</h1>
           
           <div className={cx('tags')}>
             <span className={cx('tag')}>Action</span>
@@ -45,7 +88,7 @@ export default function MovieDetails() {
           <div className={cx('metadata')}>
             <div className={cx('metaItem')}>
               <Clock className={cx('icon')} />
-              <span>24 min/ep</span>
+              <span>24 min</span>
             </div>
             <div className={cx('metaItem')}>
               <Calendar className={cx('icon')} />
@@ -57,13 +100,16 @@ export default function MovieDetails() {
             </div>
           </div>
 
+          <div className={cx('charactersSection')}>
           <div className={cx('synopsis')}>
-            <h2>Synopsis</h2>
+            <h2>Decription</h2>
             <p>
               Reeling from her recent breakup, Momo Ayase shows kindness to her socially awkward schoolmate, Ken Takakura. A rivalry quickly brews as each becomes determined to prove the other wrong about their beliefs in aliens versus the supernatural.
             </p>
-          </div>
+            </div>
+            </div>
 
+          <div className={cx('charactersSection')}>
           <div className={cx('details')}>
             <div className={cx('detailsColumn')}>
               <div className={cx('detailItem')}>
@@ -85,14 +131,45 @@ export default function MovieDetails() {
                 <p>12</p>
               </div>
             </div>
+            </div>
           </div>
 
-        
+        <div className={cx('charactersSection')}>
+          <h2 className={cx('sectionTitle')}>Characters & Voice Actors</h2>
+            <div className={cx('charactersList')}>
+            {characters.map((item, index) => (
+        <div key={index} className={cx('characterItem')}>
+          <div className={cx('characterInfo')}>
+            <Img
+              src={item.character.image}
+              alt={item.character.name}
+              className={cx('characterImage')}
+            />
+            <div className={cx('characterText')}>
+              <h4>{item.character.name}</h4>
+              <span className={cx('role')}>{item.character.role}</span>
+            </div>
+          </div>
+          <div className={cx('actorInfo')}>
+            <div className={cx('actorText')}>
+              <h4>{item.actor.name}</h4>
+              <span className={cx('language')}>{item.actor.language}</span>
+            </div>
+            <Img
+              src={item.actor.image}
+              alt={item.actor.name}
+              className={cx('actorImage')}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
 
-
+          <div className={cx('charactersSection')}>
           <div className={cx('reviews')}>
             <div className={cx('reviewsHeader')}>
-              <h2>User reviews <span className={cx('reviewCount')}>206</span></h2>
+              <h2>User reviews <span className={cx('reviewCount')}></span></h2>
               <button 
                 className={cx('rateButton')}
                 onClick={() => setShowRatingForm(true)}
@@ -108,7 +185,6 @@ export default function MovieDetails() {
                   <Star className={cx('starIcon')} />
                   <span>7/10</span>
                 </div>
-                <h3 className={cx('reviewTitle')}>A unique effort that didn't quite stick the landing</h3>
                 <p className={cx('reviewContent')}>
                   Going in I expected just a cheesy Xmas film but to its credit Red One tried to do something different in
                   the vein of a dark fantasy action Christmas adventure. It should be commended for that alone. Not
@@ -123,6 +199,7 @@ export default function MovieDetails() {
           {showRatingForm && <RatingForm onClose={() => setShowRatingForm(false)} />}
         </div>
       </div>
+    </div>
     </div>
   )
 }

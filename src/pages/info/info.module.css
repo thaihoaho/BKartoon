@@ -182,3 +182,151 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+
+
+.charactersSection {
+    margin: 40px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
+.charactersList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.characterItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.characterItem:hover {
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.characterInfo,
+.actorInfo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex: 1;
+}
+
+.actorInfo {
+    justify-content: flex-end;
+}
+
+.characterImage,
+.actorImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.characterText,
+.actorText {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.role,
+.language {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.actorText {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .characterItem {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .actorInfo {
+        justify-content: flex-start;
+    }
+
+    .actorText {
+        text-align: left;
+    }
+}
+
+.ratingLevel {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.5rem;
+    color: #ffcc00;
+    font-weight: bold;
+}
+
+.flameIcon {
+    width: 30px;
+    height: 30px;
+    color: #ff6600;
+}
+
+.reviews {
+    margin: 40px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.featuredReview {
+    margin-top: 25px;
+    /* Add spacing from Rate This Movie button */
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.featuredReview:hover {
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.reviewTag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffcc00;
+}
+
+.reviewTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #ffcc00;
+}
+
+.reviewContent {
+    line-height: 1.6;
+    opacity: 0.9;
+}
