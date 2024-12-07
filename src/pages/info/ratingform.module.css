@@ -1,53 +1,175 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background: linear-gradient(45deg, #111111, #3f3f3f);
+    border-radius: 12px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    color: white;
+}
+
+.closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.closeButton:hover {
+    opacity: 1;
+}
+
+.title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #ffcc00;
+}
+
 .form {
-    background-color: #f4f4f4;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.starRating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.starButton {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.starButton:hover {
+    transform: scale(1.1);
+}
+
+.star {
+    width: 24px;
+    height: 24px;
+    color: #666;
+    fill: none;
+    /* Không lấp đầy khi chưa chọn */
+}
+
+.star.filled {
+    color: #ffcc00;
+    fill: #ffcc00;
+    /* Lấp đầy màu vàng */
+}
+
+.ratingNumber {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    color: #ffcc00;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    gap: 5px;
+    margin: 0 auto;
+
+}
+
+.reviewInput {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
-    margin-top: 20px;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.form h3 {
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.ratingInput,
-.commentInput {
-    margin-bottom: 15px;
-}
-
-.ratingInput label,
-.commentInput label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.ratingInput input,
-.commentInput textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-}
-
-.commentInput textarea {
-    height: 100px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-size: 1rem;
+    min-height: 150px;
+    max-height: 300px;
+    /* Giới hạn chiều cao tối đa */
     resize: vertical;
 }
 
+.characterCount {
+    text-align: right;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
 .submitButton {
-    background-color: #2b2d42;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
     color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 15px;
 }
 
 .submitButton:hover {
-    background-color: #4a4a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.terms {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+}
+
+.compactModal {
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.scrollableContent {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    max-height: 60vh;
+    /* Giới hạn chiều cao modal */
+}
+
+.scrollableContent::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrollableContent::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+}
+
+.scrollableContent::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
