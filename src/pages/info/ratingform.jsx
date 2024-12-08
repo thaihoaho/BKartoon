@@ -1,45 +1,73 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import classNames from 'classnames/bind'
+import { Star } from 'lucide-react'
 import styles from './ratingform.module.css'
 
-export default function RatingForm() {
+const cx = classNames.bind(styles)
+
+export default function RatingForm({ onClose }) {
   const [rating, setRating] = useState(0)
-  const [comment, setComment] = useState('')
+  const [hover, setHover] = useState(0)
+  const [review, setReview] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Here you would typically send the rating and comment to your backend
-    console.log('Rating:', rating, 'Comment:', comment)
-    // Reset form
-    setRating(0)
-    setComment('')
+    // Handle submission logic here
+    onClose()
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <h3>Rate This Anime</h3>
-      <div className={styles.ratingInput}>
-        <label htmlFor="rating">Your Rating (0-10):</label>
-        <input
-          type="number"
-          id="rating"
-          min="0"
-          max="10"
-          step="0.1"
-          value={rating}
-          onChange={(e) => setRating(parseFloat(e.target.value))}
-          required
-        />
+    <div className={cx('overlay')}>
+      <div className={cx('modal', 'compactModal')}>
+        <button className={cx('closeButton')} onClick={onClose}>×</button>
+        <h2 className={cx('title')}>Your Rating</h2>
+
+        <form onSubmit={handleSubmit} className={cx('form')}>
+          <div className={cx('scrollableContent')}>
+            <div className={cx('starRating')}>
+              {[...Array(10)].map((_, index) => {
+                const starValue = index + 1
+                return (
+                  <button
+                    type="button"
+                    key={starValue}
+                    className={cx('starButton')}
+                    onClick={() => setRating(starValue)}
+                    onMouseEnter={() => setHover(starValue)}
+                    onMouseLeave={() => setHover(rating)}
+                  >
+                    <Star
+                      className={cx('star', {
+                        'filled': starValue <= (hover || rating)
+                      })}
+                    />
+                  </button>
+                )
+              })}
+              <span className={cx('ratingNumber')}>{rating || 0}</span>
+            </div>
+
+            <div className={cx('inputGroup')}>
+              <textarea
+                placeholder="Write your review here"
+                className={cx('reviewInput')}
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+                required
+              />
+              <div className={cx('characterCount')}>
+                Required characters: {600 - review.length}
+              </div>
+            </div>
+          </div>
+          <button type="submit" className={cx('submitButton')}>
+            Submit Review
+          </button>
+        </form>
+        <p className={cx('terms')}>
+          By submitting, you agree to our Terms of Use. The data submitted is true and not copyrighted by any third party.
+        </p>
       </div>
-      <div className={styles.commentInput}>
-        <label htmlFor="comment">Your Comment:</label>
-        <textarea
-          id="comment"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          required
-        />
-      </div>
-      <button type="submit" className={styles.submitButton}>Submit Rating</button>
-    </form>
+    </div>
   )
 }
