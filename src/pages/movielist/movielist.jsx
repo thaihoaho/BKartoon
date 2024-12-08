@@ -24,11 +24,11 @@ const MovieList = () => {
             const data = await response.json();
             console.log("Parsed response JSON:", data);
 
-            // Ánh xạ các trường từ API
+
             const moviesWithPoster = data.map((movie) => ({
-                id: movie.FILM_ID, // Map FILM_ID thành id
-                title: movie.FILM_Title, // Map FILM_Title thành title
-                poster: posterMapping[movie.FILM_ID] || defaultPoster, // Poster mapping
+                id: movie.FILM_ID, 
+                title: movie.FILM_Title, 
+                poster: posterMapping[movie.FILM_ID] || defaultPoster, 
             }));
 
             setMovies(moviesWithPoster);

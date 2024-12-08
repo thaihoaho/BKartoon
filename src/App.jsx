@@ -11,6 +11,7 @@ import FilmManagementLayout from "./pages/config/layout.jsx";
 import MovieList from "./pages/movielist/movielist.jsx";
 import AnimeDetails from "./pages/info/info.jsx";
 
+
 function App() {
 
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
         <Route path='/info' element={<AnimeDetails></AnimeDetails>} />
+        <Route path="/film/:id" element={<AnimeDetails />} />
 
       </Routes>
   )
