@@ -13,7 +13,7 @@ import FilmManagementLayout from "./pages/config/layout.jsx";
 import MovieList from "./pages/movielist/movielist.jsx";
 import AnimeDetails from "./pages/info/info.jsx";
 import RankingCategory from "./pages/ranking/RankingCategory.jsx";
-
+import Profile from "./pages/profile/profile.jsx";
 function App() {
 
   return (
@@ -22,6 +22,7 @@ function App() {
         <Route path='/signin/user' element={<Login></Login>} />
         <Route path='/signin/admin' element={<LoginAdmin></LoginAdmin>} />
         <Route path='/signup' element={<Signup></Signup>} />
+        <Route path='/profile' element={<Profile></Profile>} />
         <Route path='/role' element={<Role></Role>} />
         <Route path='/home' element={<DefaultLayout><Home></Home></DefaultLayout>} />
         <Route path='/all' element={<DefaultLayout><MovieList></MovieList></DefaultLayout>} />
