@@ -1,6 +1,3 @@
-import React, { useState } from 'react';
-import styles from './deleteFilm.module.css';
-
 import React, { useEffect, useState } from 'react';
 import styles from './deleteFilm.module.css';
 import { useNavigate } from 'react-router-dom';

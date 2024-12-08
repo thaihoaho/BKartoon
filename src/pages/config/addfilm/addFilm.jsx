@@ -1,22 +1,206 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './addFilm.module.css';
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css";
 import { useNavigate } from 'react-router-dom';
 
+const getDirectors = async (e) => {
+  e.preventDefault();
+ 
+}
+function HashtagInputWithDatalist1({ onTagsChange }) {
+  const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [directors, setDirectors] = useState([]);
+
+  useEffect(() => {
+    const fetchDirectors = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/director/name', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        const data = await response.json();
+        
+        if (!response.ok) {
+          setError(data.message || 'Failed to fetch data');
+        } else {
+          setDirectors(data);
+        }
+      } catch (error) {
+        console.error('Error fetching directors:', error);
+        setError('An error occurred while fetching the data.');
+      }
+    };
+
+    fetchDirectors();
+  }, []); 
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const trimmedValue = inputValue.trim();
+      if (trimmedValue && !tags.includes(trimmedValue)) {
+        const newTags = [...tags, trimmedValue];
+        setTags(newTags);
+        onTagsChange(newTags);
+        setInputValue("");
+      }
+    }
+  };
+
+  const removeTag = (index) => {
+    const newTags = tags.filter((_, i) => i !== index);
+    setTags(newTags);
+    onTagsChange(newTags); 
+  };
+
+  return (
+    <div >
+      <div className="hashtag-container" style={{display: "flex", flexWrap: "wrap", gap: "5px" }}>
+        <input
+          list="directors" 
+          id="hashtag-input"
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Add a director (Multiple directors => Enter)"
+          style={{
+          }}
+        />
+        <datalist id="directors">
+          {directors.map((director, index) => (
+            <option key={index} value={`${director}`} />
+          ))}
+        </datalist>
+
+        {tags.map((tag, index) => (
+          <span
+            key={index}
+            style={{
+              display: "inline-block",
+              backgroundColor: "#1abc9c",
+              borderRadius: "4px",
+              padding: "5px 10px",
+              cursor: "pointer",
+            }}
+            onClick={() => removeTag(index)}
+          >
+            {tag} ×
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function HashtagInputWithDatalist2({ onTagsChange }) {
+  const [tags, setTags] = useState([]);
+  const [inputValue, setInputValue] = useState("");
+  const [studios, setStudios] = useState([]);
+
+  useEffect(() => {
+    const fetchstudios = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/studio/name', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          setError(data.message || 'Failed to fetch data');
+        } else {
+          setStudios(data);
+        }
+      } catch (error) {
+        console.error('Error fetching studios:', error);
+        setError('An error occurred while fetching the data.');
+      }
+    };
+
+    fetchstudios();
+  }, []); 
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const trimmedValue = inputValue.trim();
+      if (trimmedValue && !tags.includes(trimmedValue)) {
+        const newTags = [...tags, trimmedValue];
+        setTags(newTags);
+        onTagsChange(newTags);
+        setInputValue("");
+      }
+    }
+  };
+
+  const removeTag = (index) => {
+    const newTags = tags.filter((_, i) => i !== index);
+    setTags(newTags);
+    onTagsChange(newTags); 
+  };
+
+  return (
+    <div >
+      <div className="hashtag-container" style={{display: "flex", flexWrap: "wrap", gap: "5px" }}>
+        <input
+          list="studios" 
+          id="hashtag-input"
+          type="text"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Add a studio (Multiple studios => Enter)"
+          style={{
+          }}
+        />
+        <datalist id="studios">
+          {studios.map((director, index) => (
+            <option key={index} value={`${director}`} />
+          ))}
+        </datalist>
+
+        {tags.map((tag, index) => (
+          <span
+            key={index}
+            style={{
+              display: "inline-block",
+              backgroundColor: "#1abc9c",
+              borderRadius: "4px",
+              padding: "5px 10px",
+              cursor: "pointer",
+            }}
+            onClick={() => removeTag(index)}
+          >
+            {tag} 
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function AddFilmPage() {
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   const handleBackClick = () => {
-    navigate('/config'); // Quay về layout chính
+    navigate('/config');
   };
-
   const [filmData, setFilmData] = useState({
     description: '',
     title: '',
-    type: 'Movie', // Default to "Movie"
+    type: 'LE',
     duration: '',
     releaseDate: '',
     episodes: '',
-    director: [],
+    director: '',
     studio: '',
   });
 
@@ -31,9 +215,9 @@ export default function AddFilmPage() {
       ...prevData,
       type,
       // Clear unrelated fields when switching type
-      duration: type === 'Movie' ? prevData.duration : '',
-      releaseDate: type === 'Movie' ? prevData.releaseDate : '',
-      episodes: type === 'Series' ? prevData.episodes : '',
+      duration: type === 'LE' ? prevData.duration : '',
+      releaseDate: type === 'LE' ? prevData.releaseDate : '',
+      episodes: type === 'BO' ? prevData.episodes : '',
     }));
   };
 
@@ -41,20 +225,21 @@ export default function AddFilmPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://your-backend-api-url/add-film', {
+      const response = await fetch('http://127.0.0.1:8000/api/addfilm', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(filmData),
       });
+      const data = await response.json();
 
-      if (response.ok) {
-        alert('Film added successfully!');
+      if (!response.error) {
+        console.log('Film added successfully!', data.message);
         setFilmData({
           description: '',
           title: '',
-          type: 'Movie',
+          type: 'LE',
           duration: '',
           releaseDate: '',
           episodes: '',
@@ -62,12 +247,24 @@ export default function AddFilmPage() {
           studio: '',
         });
       } else {
-        alert('Failed to add film.');
+        console.log('Failed to add film:', data.message);
       }
+
+      setError(data.message);
     } catch (error) {
       console.error('Error adding film:', error);
       alert('An error occurred while adding the film.');
     }
+  };
+
+  const handleTagsChange1 = (newTags) => {
+    setFilmData((prevData) => ({ ...prevData, director : newTags }));
+    console.log("Tags:", newTags);
+  };
+
+  const handleTagsChange2 = (newTags) => {
+    setFilmData((prevData) => ({ ...prevData, studio : newTags }));
+    console.log("Tags:", newTags);
   };
 
   return (
@@ -110,12 +307,12 @@ export default function AddFilmPage() {
               onChange={handleTypeChange}
               required
             >
-              <option value="Movie">Movie</option>
-              <option value="Series">Series</option>
+              <option value="LE">Movie</option>
+              <option value="BO">Series</option>
             </select>
           </div>
 
-          {filmData.type === 'Movie' && (
+          {filmData.type === 'LE' && (
             <>
               <div className={styles.formGroup}>
                 <label htmlFor="duration">Duration (minutes)</label>
@@ -143,7 +340,7 @@ export default function AddFilmPage() {
             </>
           )}
 
-          {filmData.type === 'Series' && (
+          {filmData.type === 'BO' && (
             <div className={styles.formGroup}>
               <label htmlFor="episodes">Episodes</label>
               <input
@@ -159,31 +356,23 @@ export default function AddFilmPage() {
 
           <div className={styles.formGroup}>
             <label htmlFor="director">Director</label>
-            <input
-              id="director"
-              name="director"
-              type="text"
-              value={filmData.director}
-              onChange={handleInputChange}
-              required
-            />
+            <HashtagInputWithDatalist1 onTagsChange={handleTagsChange1}/>
+            
           </div>
+
 
           <div className={styles.formGroup}>
             <label htmlFor="studio">Studio</label>
-            <input
-              id="studio"
-              name="studio"
-              type="text"
-              value={filmData.studio}
-              onChange={handleInputChange}
-              required
-            />
+
+            <HashtagInputWithDatalist2 onTagsChange={handleTagsChange2}/>
           </div>
+
 
           <button type="submit" className={styles.submitButton}>
             Add Film
           </button>
+
+          <div className={styles.error}>{error}</div>
         </form>
       </div>
     </div>
