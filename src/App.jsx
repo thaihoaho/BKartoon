@@ -12,7 +12,7 @@ import UpdateFilmPage from "./pages/config/updateFilm/updateFilm.jsx";
 import FilmManagementLayout from "./pages/config/layout.jsx";
 import MovieList from "./pages/movielist/movielist.jsx";
 import AnimeDetails from "./pages/info/info.jsx";
-
+import RankingCategory from "./pages/ranking/RankingCategory.jsx";
 
 function App() {
 
@@ -30,6 +30,8 @@ function App() {
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
         <Route path='/info' element={<AnimeDetails></AnimeDetails>} />
         <Route path="/film/:id" element={<AnimeDetails />} />
+        <Route path="/ranking" element={<RankingCategory />} />
+      
 
       </Routes>
   )

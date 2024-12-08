@@ -5,12 +5,14 @@ import styles from './info.module.css'
 import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react'
 import RatingForm from './ratingform'
 import { Flame } from 'lucide-react'
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
   
 export default function MovieDetails() {
   const [showRatingForm, setShowRatingForm] = useState(false)
+  const { id } = useParams();
 
   const characters = [
     {

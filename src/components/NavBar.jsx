@@ -18,6 +18,7 @@ const NavBar = () => {
         <li><button onClick={() => handleNavigation('/home')}>Trang chủ</button></li>
         <li><button onClick={() => handleNavigation('/all')}>Tất cả phim</button></li>
         <li><button onClick={() => handleNavigation('/contact')}>Liên hệ</button></li>
+        <li><button onClick={() => handleNavigation('/ranking')}>Ranking</button></li>
       </ul>
     </nav>
   );

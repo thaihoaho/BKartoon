@@ -7,6 +7,7 @@ const clx = classNames.bind(styles);
 
 const MovieCard = ({ movie, isFeatured }) => {
   return (
+    <Link to={`/film/${movie.id}`} className={clx("movie-card-link")}>
     <div className={clx("movie-card", { "movie-card-featured": isFeatured })}>
       <img
         src={movie.poster}
@@ -16,7 +17,8 @@ const MovieCard = ({ movie, isFeatured }) => {
       <div className={clx("movie-info")}>
         <h3 className={clx("movie-title")}>{movie.title}</h3>
       </div>
-    </div>
+      </div>
+      </Link>
   );
 };
 
