@@ -42,3 +42,27 @@
 .links li button:focus {
   outline: none;
 }
+.logoutButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 1.1rem;
+  border: 2px solid #ff6600;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #ff6600;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.logoutIcon {
+  width: 18px;
+  height: 18px;
+}
