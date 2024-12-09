@@ -1,17 +1,20 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Img } from 'react-image'
 import classNames from 'classnames/bind';
 import styles from './info.module.css'
 import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react'
 import RatingForm from './ratingform'
 import { Flame } from 'lucide-react'
+import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
-  
 export default function MovieDetails() {
-  const [showRatingForm, setShowRatingForm] = useState(false)
+  const location = useLocation();
+  const pathname = location.pathname;
+  const idx = pathname.split('/')[2];
 
+  const [showRatingForm, setShowRatingForm] = useState(false)
   const characters = [
     {
       character: {
@@ -50,6 +53,8 @@ export default function MovieDetails() {
       }
     }
   ]
+
+
 
   return (
     <div className={cx('container')}>

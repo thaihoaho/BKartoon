@@ -6,7 +6,7 @@ import Login from "./pages/auth/signin.jsx";
 import Signup from "./pages/auth/signup.jsx";
 import Role from "./pages/auth/role.jsx";
 import LoginAdmin from "./pages/auth/signinAdmin.jsx";
-import AddFilmPage from "./pages/config/addFilm/addFilm.jsx";
+import AddFilmPage from "./pages/config/addfilm/addFilm.jsx";
 import UpdateFilmPage from "./pages/config/updateFilm/updateFilm.jsx";
 // import DeleteFilmPage from "./pages/config/deleteFilm/deleteFilm.jsx";
 import FilmManagementLayout from "./pages/config/layout.jsx";
@@ -28,7 +28,8 @@ function App() {
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
-        <Route path='/info' element={<AnimeDetails></AnimeDetails>} />
+        <Route path='/info/:id' element={<DefaultLayout><AnimeDetails></AnimeDetails></DefaultLayout>} />
+        <Route path='/info' element={<DefaultLayout><AnimeDetails></AnimeDetails></DefaultLayout>} />
 
       </Routes>
   )
