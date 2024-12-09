@@ -38,8 +38,8 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
     setIsLoading(true);
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/toggle-follow', {
-        sharer_id: sharerId, // ID của tài khoản hiện tại
-        shared_id: sharedId, // ID của trang profile (lấy từ URL)
+        sharer_id: sharedId, // ID của tài khoản hiện tại
+        shared_id: sharerId, // ID của trang profile (lấy từ URL)
         fav_id: listId, // listId của nút hiện tại
       });
 
