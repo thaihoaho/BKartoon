@@ -30,7 +30,7 @@ const App = () => {
           </h1>
           <div className={clx('buttons')}>
             <button onClick={() => navigate('/signup')}>Đăng ký</button>
-            <button onClick={() => navigate('/signin')}>Đăng nhập</button>
+            <button onClick={() => navigate('/role')}>Đăng nhập</button>
           </div>
 
         </div>
