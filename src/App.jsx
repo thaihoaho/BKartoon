@@ -14,6 +14,8 @@ import MovieList from "./pages/movielist/movielist.jsx";
 import AnimeDetails from "./pages/info/info.jsx";
 import RankingCategory from "./pages/ranking/RankingCategory.jsx";
 import Profile from "./pages/profile/profile.jsx";
+import FILMManagement from "./pages/admin/admin.jsx";
+
 function App() {
 
   return (
@@ -35,6 +37,7 @@ function App() {
         <Route path='/role' element={<Role></Role>} />
         <Route path='/home' element={<DefaultLayout><Home></Home></DefaultLayout>} />
         <Route path='/all' element={<DefaultLayout><MovieList></MovieList></DefaultLayout>} />
+        <Route path='/admin' element={<FILMManagement></FILMManagement>} />
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
