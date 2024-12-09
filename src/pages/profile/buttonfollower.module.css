@@ -14,10 +14,6 @@
     width: 120px;
 }
 
-.follow-button:not(.following) {
-    /* No changes needed here */
-}
-
 .follow-button.following {
     background-color: #ff0000;
     color: #ff6600;

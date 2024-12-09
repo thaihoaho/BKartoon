@@ -6,24 +6,36 @@ import styles from './profile.module.css'
 import defaultAvatar from '../../assets/user.png'
 import axios from 'axios';
 import FollowButton from './buttonfollower.jsx'
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles)
 
 export default function Profile() {
   // Mock data - replace with actual data from your backend
+  const { id } = useParams(); // Lấy id từ URL (nếu có)
+  const [userId, setUserId] = useState(null); // ID của người dùng
   const [user, setUser] = useState(null);
+
   useEffect(() => {
-    // Lấy thông tin người dùng từ localStorage
+    // Kiểm tra nếu không có id trong URL, sử dụng id từ localStorage
     const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (storedUser) {
+    if (!id && storedUser) {
+      setUserId(storedUser.id);
+    } else {
+      setUserId(id); // Nếu có id trong URL, dùng id đó
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (userId) {
       // Gọi API để lấy chi tiết hồ sơ
       axios
-        .get(`http://127.0.0.1:8000/api/user-profile/${storedUser.id}`)
+        .get(`http://127.0.0.1:8000/api/user-profile/${userId}`)
         .then((response) => {
           setUser({
             username: response.data.username,
             joinDate: response.data.joinDate,
-            profileImage: defaultAvatar, // API không trả ảnh, dùng ảnh mặc định
+            profileImage: defaultAvatar,
             favoriteLists: response.data.favoriteLists,
             reputationScore: response.data.reputationScore,
           });
@@ -32,7 +44,7 @@ export default function Profile() {
           console.error('Error fetching user profile:', error);
         });
     }
-  }, []);
+  }, [userId]); // Chạy lại khi userId thay đổi
 
   if (!user) {
     return <div>Loading...</div>;

@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from './pages/home/home.jsx';
 import DefaultLayout from "./components/layout/DefaultLayout.jsx";
 import Start from "./pages/start/start.jsx";
@@ -22,7 +22,16 @@ function App() {
         <Route path='/signin/user' element={<Login></Login>} />
         <Route path='/signin/admin' element={<LoginAdmin></LoginAdmin>} />
         <Route path='/signup' element={<Signup></Signup>} />
-        <Route path='/profile' element={<Profile></Profile>} />
+        <Route
+          path="/profile"
+          element={
+            // Lấy ID từ localStorage
+            localStorage.getItem('user')
+              ? <Navigate to={`/profile/${JSON.parse(localStorage.getItem('user')).id}`} />
+              : <Navigate to="/" />
+          }
+      />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path='/role' element={<Role></Role>} />
         <Route path='/home' element={<DefaultLayout><Home></Home></DefaultLayout>} />
         <Route path='/all' element={<DefaultLayout><MovieList></MovieList></DefaultLayout>} />
