@@ -22,8 +22,9 @@ const NavBar = () => {
       <ul className={clx('links')}>
         <li><button onClick={() => handleNavigation('/home')}>Trang chủ</button></li>
         <li><button onClick={() => handleNavigation('/all')}>Tất cả phim</button></li>
-        <li><button onClick={() => handleNavigation('/contact')}>Liên hệ</button></li>
         <li><button onClick={() => handleNavigation('/ranking')}>Ranking</button></li>
+        <li><button onClick={() => handleNavigation('/ranking')}>Tra cứu</button></li>
+        <li><button onClick={() => handleNavigation('/profile')}>Hồ sơ</button></li>
       </ul>
       <button onClick={handleLogout} className={clx('logoutButton')}>
         <LogOut className={clx('logoutIcon')} />

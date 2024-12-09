@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Img } from 'react-image'
-import { Calendar, Film, Users } from 'lucide-react'
+import { Calendar, Film, Users, ArrowLeft } from 'lucide-react'
 import classNames from 'classnames/bind'
 import styles from './profile.module.css'
 import defaultAvatar from '../../assets/user.png'
 import axios from 'axios';
 import FollowButton from './buttonfollower.jsx'
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 const cx = classNames.bind(styles)
 
@@ -15,6 +17,8 @@ export default function Profile() {
   const { id } = useParams(); // Lấy id từ URL (nếu có)
   const [userId, setUserId] = useState(null); // ID của người dùng
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     // Kiểm tra nếu không có id trong URL, sử dụng id từ localStorage
@@ -52,6 +56,13 @@ export default function Profile() {
 
   return (
     <div className={cx('container')}>
+      <button 
+        onClick={() => navigate('/home')} 
+        className={cx('backButton')}
+      >
+        <ArrowLeft className={cx('backIcon')} />
+        Quay lại
+      </button>
       <div className={cx('header')}>
         <div className={cx('profileImage')}>
           <Img
