@@ -172,3 +172,17 @@
         max-width: 200px;
     }
 }
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .listHeader {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+}

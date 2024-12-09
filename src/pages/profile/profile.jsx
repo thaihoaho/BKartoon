@@ -1,39 +1,41 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Img } from 'react-image'
 import { Calendar, Film, Users } from 'lucide-react'
 import classNames from 'classnames/bind'
 import styles from './profile.module.css'
 import defaultAvatar from '../../assets/user.png'
+import axios from 'axios';
+import FollowButton from './buttonfollower.jsx'
 
 const cx = classNames.bind(styles)
 
 export default function Profile() {
   // Mock data - replace with actual data from your backend
-  const user = {
-    username: "Illian",
-    joinDate: "2023-12-01",
-    profileImage: defaultAvatar,
-    favoriteLists: [
-      {
-        id: 1,
-        name: "Anime Hay",
-        movieCount: 24,
-        followerCount: 156
-      },
-      {
-        id: 2,
-        name: "Phim Hành Động",
-        movieCount: 18,
-        followerCount: 89
-      },
-      {
-        id: 3,
-        name: "Phim Kinh Dị",
-        movieCount: 12,
-        followerCount: 45
-      }
-    ],
-    reputationScore: 850
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    // Lấy thông tin người dùng từ localStorage
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (storedUser) {
+      // Gọi API để lấy chi tiết hồ sơ
+      axios
+        .get(`http://127.0.0.1:8000/api/user-profile/${storedUser.id}`)
+        .then((response) => {
+          setUser({
+            username: response.data.username,
+            joinDate: response.data.joinDate,
+            profileImage: defaultAvatar, // API không trả ảnh, dùng ảnh mặc định
+            favoriteLists: response.data.favoriteLists,
+            reputationScore: response.data.reputationScore,
+          });
+        })
+        .catch((error) => {
+          console.error('Error fetching user profile:', error);
+        });
+    }
+  }, []);
+
+  if (!user) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -53,7 +55,7 @@ export default function Profile() {
           <div className={cx('stats')}>
             <div className={cx('statItem')}>
               <Film className={cx('icon')} />
-              <span>87 danh sách yêu thích</span>
+              <span>{user.favoriteLists.length} danh sách yêu thích</span>
             </div>
             <div className={cx('statItem')}>
               <Calendar className={cx('icon')} />
@@ -88,6 +90,14 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
+              <FollowButton 
+                  listId={list.id}
+                  initialIsFollowing={false}
+                  onFollowChange={(isFollowing) => {
+                    console.log('Follow status changed:', isFollowing);
+                    // Ở đây bạn có thể cập nhật UI hoặc gọi thêm API nếu cần
+                  }}
+                />
             </div>
           ))}
         </div>
