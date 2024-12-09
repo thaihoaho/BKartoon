@@ -10,19 +10,24 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
   // Lấy sharer_id từ localStorage
   const sharerId = JSON.parse(localStorage.getItem('user'))?.id;
 
-  // Xác định shared_id (id của trang profile hoặc từ props listId)
+  // Lấy shared_id từ URL
   const getSharedId = () => {
     const pathParts = window.location.pathname.split('/');
-    return pathParts[pathParts.length - 1]; // Luôn lấy ID từ URL
+    return pathParts[pathParts.length - 1]; // ID của trang profile
   };
 
-  // Khôi phục trạng thái từ localStorage khi component được tải lại
+  const sharedId = getSharedId();
+
+  // Tạo key lưu trạng thái trong localStorage
+  const localStorageKey = `followStatus-${sharedId}-${listId}`;
+
+  // Khôi phục trạng thái từ localStorage khi component được tải
   useEffect(() => {
-    const savedStatus = localStorage.getItem(`followStatus-${getSharedId()}`);
+    const savedStatus = localStorage.getItem(localStorageKey);
     if (savedStatus !== null) {
       setIsFollowing(JSON.parse(savedStatus));
     }
-  }, []);
+  }, [localStorageKey]);
 
   const handleFollow = async () => {
     if (!sharerId) {
@@ -32,20 +37,21 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
 
     setIsLoading(true);
     try {
-      const sharedId = getSharedId(); // Lấy shared_id (linh động từ URL hoặc props)
       const response = await axios.post('http://127.0.0.1:8000/api/toggle-follow', {
-        sharer_id: sharerId, // Lấy từ localStorage
-        shared_id: sharedId, // Lấy shared_id từ URL hoặc listId
-        fav_id: listId, // Nếu listId là fav_id, truyền nó vào
+        sharer_id: sharerId, // ID của tài khoản hiện tại
+        shared_id: sharedId, // ID của trang profile (lấy từ URL)
+        fav_id: listId, // listId của nút hiện tại
       });
 
       const { error, message } = response.data;
       if (!error) {
-        // Lưu trạng thái mới vào localStorage
-        const newStatus = !isFollowing;
+        const newStatus = !isFollowing; // Đổi trạng thái
         setIsFollowing(newStatus);
-        localStorage.setItem(`followStatus-${sharedId}`, JSON.stringify(newStatus));
 
+        // Lưu trạng thái mới vào localStorage với key duy nhất
+        localStorage.setItem(localStorageKey, JSON.stringify(newStatus));
+
+        // Gọi callback nếu có để cập nhật trạng thái bên ngoài
         if (onFollowChange) {
           onFollowChange(newStatus);
         }
