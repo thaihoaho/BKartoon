@@ -175,3 +175,28 @@
     font-size: 20px;
     /* Tăng kích thước icon */
 }
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.backIcon {
+    width: 20px;
+    height: 20px;
+}

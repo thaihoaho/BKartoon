@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { Img } from 'react-image'
-import { Star, Flame, AlertCircle } from 'lucide-react'
+import { Star, Flame, AlertCircle, ArrowLeft } from 'lucide-react'
 import classNames from 'classnames/bind'
 import styles from './RankingCategory.module.css'
 import defaultPoster from "../../assets/default.jpg";
 import posterMapping from '../movielist/mapping'
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles)
 
@@ -13,7 +14,7 @@ export default function RankingCategory() {
   const [movies, setMovies] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-
+  const navigate = useNavigate();
   const handleSearch = async () => {
     
 
@@ -46,6 +47,13 @@ export default function RankingCategory() {
 
   return (
     <div className={cx('container')}>
+      <button 
+        onClick={() => navigate('/home')} 
+        className={cx('backButton')}
+      >
+        <ArrowLeft className={cx('backIcon')} />
+        Quay lại
+      </button>
       <div className={cx('content')}>
         <h1 className={cx('title')}>Xếp hạng theo thể loại</h1>
         
