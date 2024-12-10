@@ -1,0 +1,198 @@
+.movie-management {
+    padding: 24px;
+    background-color: #1a1a1a;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.add-movie-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-movie-btn:hover {
+    background-color: #ff8533;
+}
+
+.filters-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.search-bar {
+    flex: 1;
+    min-width: 300px;
+    position: relative;
+}
+
+.search-bar input {
+    width: 90%;
+    padding: 10px 40px;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.filter-options {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #333;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-btn:hover {
+    background-color: #444;
+}
+
+.movies-table {
+    background-color: #262626;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background-color: #333;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 500;
+    color: #999;
+}
+
+td {
+    padding: 16px;
+    border-bottom: 1px solid #333;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+td:nth-child(2),
+/* Cột "Mô tả" */
+th:nth-child(2) {
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td:nth-child(4),
+/* Cột "Trạng thái" */
+th:nth-child(4) {
+    width: 120px;
+    text-align: center;
+}
+
+.status-badge {
+    background-color: #1a4d1a;
+    color: #4caf50;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn.edit {
+    background-color: #2d4263;
+    color: #63a4ff;
+}
+
+.action-btn.edit:hover {
+    background-color: #3a537c;
+}
+
+.action-btn.delete {
+    background-color: #4a2424;
+    color: #ff6b6b;
+}
+
+.action-btn.delete:hover {
+    background-color: #5c2d2d;
+}
+
+@media (max-width: 768px) {
+    .filters-section {
+        flex-direction: column;
+    }
+
+    .filter-options {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .filter-btn {
+        flex: 1;
+    }
+
+    .movies-table {
+        overflow-x: auto;
+    }
+}

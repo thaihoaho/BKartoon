@@ -1,0 +1,213 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #111111, #3f3f3f);
+    color: #fff;
+    padding: 40px 20px;
+    position: relative;
+    /* Added to accommodate absolute positioning of reputation widget */
+}
+
+.header {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profileImage {
+    flex-shrink: 0;
+}
+
+.avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 102, 0, 0.5);
+}
+
+.userInfo {
+    flex: 1;
+}
+
+.username {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.stats {
+    display: flex;
+    gap: 30px;
+}
+
+.statItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    opacity: 0.8;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: #ffcc00;
+}
+
+.favoritesList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.listItem {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.listItem:hover {
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.listName {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.listMeta {
+    display: flex;
+    gap: 20px;
+}
+
+.metaItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.reputationWidget {
+    position: absolute;
+    right: 40px;
+    top: 40px;
+    background: rgba(255, 102, 0, 0.1);
+    border: 2px solid rgba(255, 102, 0, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.reputationScore {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.scoreValue {
+    font-size: 2.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.scoreLabel {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .stats {
+        justify-content: center;
+    }
+
+    .listHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .listMeta {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .reputationWidget {
+        position: static;
+        margin: 20px auto;
+        max-width: 200px;
+    }
+}
+.listHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+@media (max-width: 768px) {
+    .listHeader {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.backIcon {
+    width: 20px;
+    height: 20px;
+}

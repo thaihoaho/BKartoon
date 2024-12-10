@@ -5,7 +5,8 @@ import styles from './info.module.css'
 import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react'
 import RatingForm from './ratingform'
 import { Flame } from 'lucide-react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
+
 
 const cx = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ export default function MovieDetails() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showRatingForm, setShowRatingForm] = useState(false)
-  const [average, setAverage] = useState(0);
+
   const characters = [
     {
       character: {

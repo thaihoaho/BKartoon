@@ -1,0 +1,202 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(45deg, #111111, #3f3f3f);
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.searchSection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.searchInput {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.searchButton {
+    padding: 12px 24px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.error {
+    color: #ff6666;
+    margin-bottom: 20px;
+}
+
+.movieList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.movieItem {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    transition: background-color 0.3s ease;
+}
+
+.movieItem:hover {
+    background: rgba(255, 102, 0, 0.1);
+}
+
+.rank {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffcc00;
+    min-width: 40px;
+    text-align: center;
+}
+
+.poster {
+    width: 100px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.movieInfo {
+    flex: 1;
+}
+
+.movieTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.starIcon {
+    color: #ffcc00;
+    width: 20px;
+    height: 20px;
+}
+
+.score {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.maxScore {
+    font-size: 1rem;
+    opacity: 0.7;
+}
+
+.ratingLevel {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+    color: #ffcc00;
+}
+
+.flameIcon {
+    width: 16px;
+    height: 16px;
+    color: #ff6600;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 40px;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+    .movieItem {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .rank {
+        align-self: center;
+    }
+
+    .poster {
+        width: 100%;
+        height: 200px;
+    }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  color: #D32F2F;
+  font-weight: bold;
+  font-size: 18px; /* Tăng kích thước chữ */
+}
+.errorIcon {
+    color: #D32F2F;
+    font-size: 20px;
+    /* Tăng kích thước icon */
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff6600, #ffcc00);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.backButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 102, 0, 0.4);
+}
+
+.backIcon {
+    width: 20px;
+    height: 20px;
+}

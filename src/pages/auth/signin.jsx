@@ -21,6 +21,11 @@ const Login = () => {
     });
     alert(response.data.message);
 
+    const user = response.data.user;
+    localStorage.setItem('user', JSON.stringify(user));
+    const user2 = localStorage.getItem('user');
+    console.log("user", user);
+    console.log("user2", user2);
     // Kiểm tra role và điều hướng phù hợp
     const role = response.data.user.role;
     if (role === 'admin') {
