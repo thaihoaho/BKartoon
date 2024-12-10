@@ -17,6 +17,7 @@ export default function MovieDetails() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showRatingForm, setShowRatingForm] = useState(false)
+  const [average, setAverage] = useState(0);  const { id } = useParams();
 
   const characters = [
     {
