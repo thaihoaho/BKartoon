@@ -20,7 +20,7 @@ const MovieList = () => {
 
     const handleCardClick = (movieId) => {
         console.log("nav");
-        navigate(`/info/${movieId}`);
+        navigate(`/info/26`);
     };
 
     return (

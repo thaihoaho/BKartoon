@@ -11,7 +11,7 @@ import UpdateFilmPage from "./pages/config/updateFilm/updateFilm.jsx";
 // import DeleteFilmPage from "./pages/config/deleteFilm/deleteFilm.jsx";
 import FilmManagementLayout from "./pages/config/layout.jsx";
 import MovieList from "./pages/movielist/movielist.jsx";
-import AnimeDetails from "./pages/info/info.jsx";
+import MovieDetails from "./pages/info/info.jsx";
 
 
 function App() {
@@ -28,8 +28,8 @@ function App() {
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
-        <Route path='/info/:id' element={<DefaultLayout><AnimeDetails></AnimeDetails></DefaultLayout>} />
-        <Route path='/info' element={<DefaultLayout><AnimeDetails></AnimeDetails></DefaultLayout>} />
+        <Route path='/info/:id' element={<MovieDetails></MovieDetails>} />
+        {/* <Route path='/info' element={<DefaultLayout><MovieDetails></MovieDetails></DefaultLayout>} /> */}
 
       </Routes>
   )

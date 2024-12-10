@@ -13,8 +13,10 @@ export default function MovieDetails() {
   const location = useLocation();
   const pathname = location.pathname;
   const idx = pathname.split('/')[2];
-
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [showRatingForm, setShowRatingForm] = useState(false)
+  const [average, setAverage] = useState(0);
   const characters = [
     {
       character: {
@@ -31,7 +33,7 @@ export default function MovieDetails() {
     {
       character: {
         name: "Takakura, Ken",
-        role: "Main", 
+        role: "Main",
         image: "src/assets/user.png"
       },
       actor: {
@@ -53,8 +55,46 @@ export default function MovieDetails() {
       }
     }
   ]
+  const [info, setInfo] = useState();
 
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/movie/' + idx, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
 
+        const data = await response.json();
+        console.log(data);
+        if (!response.ok) {
+          setError(data.message || 'Failed to fetch data');
+        } else {
+          setInfo(data);
+          const ratings = data.rating;
+          const averageRating = ratings.reduce((sum, rate) => sum + parseFloat(rate.Point), 0) / ratings.length;
+          console.log(averageRating);
+          setAverage(averageRating.toFixed(2));
+        }
+      } catch (error) {
+        console.error('Error fetching infos:', error);
+        setError('An error occurred while fetching the data.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInfo();
+  }, [idx]);
+
+  if (loading)
+    return (
+      <div className={cx('spinner-container')}>
+        <div className={cx('spinner')}></div>
+      </div>
+    );
 
   return (
     <div className={cx('container')}>
@@ -69,142 +109,167 @@ export default function MovieDetails() {
           />
           <div className={cx('ratingLevel')}>
             <Flame className={cx('flameIcon')} />
-          <span>Average</span>
+            <span>{info.FILM_RatingLevel}</span>
           </div>
           <div className={cx('rating')}>
             <div className={cx('ratingScore')}>
               <Star className={cx('starIcon')} />
-              <span className={cx('score')}>8.71</span>
+              <span className={cx('score')}>{average}</span>
               <span className={cx('maxScore')}>/10</span>
             </div>
-            <span className={cx('votes')}>109,860 votes</span>
+            <span className={cx('votes')}>{info.rating.length} {' votes'}</span>
           </div>
         </div>
 
         <div className={cx('infoSection')}>
-          <h1 className={cx('title')}>Conan</h1>
-          
+          <h1 className={cx('title')}>{info.FILM_Title}</h1>
+
           <div className={cx('tags')}>
-            <span className={cx('tag')}>Action</span>
-            <span className={cx('tag')}>Adventure</span>
-            <span className={cx('tag')}>Comedy</span>
+            {info.categories.map((tag, index) => (
+              <span key={index} className={cx('tag')}>
+                {tag.CATE_Name}
+              </span>
+            ))}
           </div>
 
           <div className={cx('metadata')}>
-            <div className={cx('metaItem')}>
-              <Clock className={cx('icon')} />
-              <span>24 min</span>
+            <div className={cx('metaItem')}>             
+              {info.FILM_Type == 'LE' ? <span><Clock className={cx('icon')} />{info.movie.MOV_Duration}p</span> : ''}
             </div>
-            <div className={cx('metaItem')}>
-              <Calendar className={cx('icon')} />
-              <span>Oct 2024</span>
+            <div className={cx('metaItem')}>             
+              {info.FILM_Type == 'LE' ? <span><Calendar className={cx('icon')} />{info.movie.MOV_Release_day}</span> : ''}
             </div>
             <div className={cx('metaItem')}>
               <Film className={cx('icon')} />
-              <span>TV Series</span>
+              <span>{info.FILM_Type == 'LE' ? 'Movie' : 'Series'}</span>
             </div>
           </div>
 
           <div className={cx('charactersSection')}>
-          <div className={cx('synopsis')}>
-            <h2>Decription</h2>
-            <p>
-              Reeling from her recent breakup, Momo Ayase shows kindness to her socially awkward schoolmate, Ken Takakura. A rivalry quickly brews as each becomes determined to prove the other wrong about their beliefs in aliens versus the supernatural.
-            </p>
+            <div className={cx('synopsis')}>
+              <h2>Decription</h2>
+              <p>
+                {info.FILM_Description}
+              </p>
             </div>
-            </div>
+          </div>
 
           <div className={cx('charactersSection')}>
-          <div className={cx('details')}>
-            <div className={cx('detailsColumn')}>
-              <div className={cx('detailItem')}>
-                <h3><User className={cx('icon')} /> Director</h3>
-                <p>Yukinobu Tatsu</p>
-              </div>
-              <div className={cx('detailItem')}>
-                <h3><Award className={cx('icon')} /> Studio</h3>
-                <p>Science SARU</p>
-              </div>
-            </div>
-            <div className={cx('detailsColumn')}>
-              <div className={cx('detailItem')}>
-                <h3>Status</h3>
-                <p>Currently Airing</p>
-              </div>
-              <div className={cx('detailItem')}>
-                <h3>Episodes</h3>
-                <p>12</p>
-              </div>
-            </div>
-            </div>
-          </div>
+            <div className={cx('details')}>
+              <div className={cx('detailsColumn')}>
+                <div className={cx('detailItem')}>
+                  <h3><User className={cx('icon')} /> Director</h3>
+                  {info.film_directories.map((director, index) => (
+                    <span key={index}>
+                      {[director.FName, director.MName, director.LName]
+                        .filter(Boolean)
+                        .join(' ')}
+                      {(index > 0) ? ',' : ''}
+                    </span>
+                  ))}
 
-        <div className={cx('charactersSection')}>
-          <h2 className={cx('sectionTitle')}>Characters & Voice Actors</h2>
-            <div className={cx('charactersList')}>
-            {characters.map((item, index) => (
-        <div key={index} className={cx('characterItem')}>
-          <div className={cx('characterInfo')}>
-            <Img
-              src={item.character.image}
-              alt={item.character.name}
-              className={cx('characterImage')}
-            />
-            <div className={cx('characterText')}>
-              <h4>{item.character.name}</h4>
-              <span className={cx('role')}>{item.character.role}</span>
-            </div>
-          </div>
-          <div className={cx('actorInfo')}>
-            <div className={cx('actorText')}>
-              <h4>{item.actor.name}</h4>
-              <span className={cx('language')}>{item.actor.language}</span>
-            </div>
-            <Img
-              src={item.actor.image}
-              alt={item.actor.name}
-              className={cx('actorImage')}
-            />
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-
-          <div className={cx('charactersSection')}>
-          <div className={cx('reviews')}>
-            <div className={cx('reviewsHeader')}>
-              <h2>User reviews <span className={cx('reviewCount')}></span></h2>
-              <button 
-                className={cx('rateButton')}
-                onClick={() => setShowRatingForm(true)}
-              >
-                Rate This Movie
-              </button>
-            </div>
-
-            <div className={cx('reviewsList')}>
-              <div className={cx('featuredReview')}>
-                <div className={cx('reviewTag')}>FEATURED REVIEW</div>
-                <div className={cx('reviewRating')}>
-                  <Star className={cx('starIcon')} />
-                  <span>7/10</span>
                 </div>
-                <p className={cx('reviewContent')}>
-                  Going in I expected just a cheesy Xmas film but to its credit Red One tried to do something different in
-                  the vein of a dark fantasy action Christmas adventure. It should be commended for that alone. Not
-                  quite the well executed violence of Violent Night, Red One takes a more light hearted approach with its
-                  dark action fantasy that can cater to a broader audience...
-                </p>
-                
+                <div className={cx('detailItem')}>
+                  <h3><Award className={cx('icon')} /> Studio</h3>
+                  {info.studio.map((studio, index) => (
+                    <span key={index}>
+                      {studio.STU_Name}
+                      {(index > 0) ? ',' : ''}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className={cx('detailsColumn')}>
+                <div className={cx('detailItem')}>
+                  {info.FILM_Type == 'BO' &&
+                    <div> <h3>Status</h3>
+                      <p>{info.series.ser_status.Status}</p>
+                    </div>
+                  }
+                </div>
+                <div className={cx('detailItem')}>
+                  {info.FILM_Type == 'BO' &&
+                    <div><h3>Episodes</h3>
+                      <p>{info.series.SER_Number_of_episodes}</p></div>
+                  }
+                </div>
               </div>
             </div>
           </div>
 
-          {showRatingForm && <RatingForm onClose={() => setShowRatingForm(false)} />}
+          <div className={cx('charactersSection')}>
+            <h2 className={cx('sectionTitle')}>Characters & Voice Actors</h2>
+            <div className={cx('charactersList')}>
+              {info.character.map((item, index) => (
+                <div key={index} className={cx('characterItem')}>
+                  <div className={cx('characterInfo')}>
+                    {/* <Img
+                      src={item.character.image}
+                      alt={item.character.name}
+                      className={cx('characterImage')}
+                    /> */}
+                    <div className={cx('characterText')}>
+                      <h4 >{item.CHA_Name}</h4>
+                    </div>
+                  </div>
+                  <div className={cx('actorInfo')}>
+                    {item.voice_actors.map((actor) => (
+                      <div className={cx('actorText')}>
+                        <h4>{actor.FName}</h4>
+                      </div>
+                    ))}
+
+                    {/* <Img
+                      src={item.actor.image}
+                      alt={item.actor.name}
+                      className={cx('actorImage')}
+                    /> */}
+                    
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className={cx('charactersSection')}>
+            <div className={cx('reviews')}>
+              <div className={cx('reviewsHeader')}>
+                <h2>User reviews <span className={cx('reviewCount')}></span></h2>
+                <button
+                  className={cx('rateButton')}
+                  onClick={() => setShowRatingForm(true)}
+                >
+                  Rate This Movie
+                </button>
+              </div>
+
+              <div className={cx('reviewsList')}>
+                <div className={cx('featuredReview')}>
+                  <div className={cx('reviewTag')}>FEATURED REVIEW</div>
+                  {
+                    info.rating.map((rate) => (
+                      <div>
+                        <span className={cx('name')}>
+                          {rate.USER_Username}
+                          {' '}
+                          <span className={cx('point')}>{rate.Point}</span>
+                          {' '}
+                          <Star className={cx('starIcon')} />
+                        </span>
+                        <p className={cx('reviewContent')}>
+                          {rate.Comment}
+                        </p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+
+              {showRatingForm && <RatingForm onClose={() => setShowRatingForm(false)} />}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+
     </div>
   )
 }

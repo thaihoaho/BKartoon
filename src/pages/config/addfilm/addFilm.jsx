@@ -4,10 +4,6 @@ import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css";
 import { useNavigate } from 'react-router-dom';
 
-const getDirectors = async (e) => {
-  e.preventDefault();
- 
-}
 function HashtagInputWithDatalist1({ onTagsChange }) {
   const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
