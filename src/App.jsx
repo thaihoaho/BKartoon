@@ -6,15 +6,19 @@ import Login from "./pages/auth/signin.jsx";
 import Signup from "./pages/auth/signup.jsx";
 import Role from "./pages/auth/role.jsx";
 import LoginAdmin from "./pages/auth/signinAdmin.jsx";
-import AddFilmPage from "./pages/config/addFilm/addFilm.jsx";
+import AddFilmPage from "./pages/config/addfilm/addFilm.jsx";
 import UpdateFilmPage from "./pages/config/updateFilm/updateFilm.jsx";
 // import DeleteFilmPage from "./pages/config/deleteFilm/deleteFilm.jsx";
 import FilmManagementLayout from "./pages/config/layout.jsx";
 import MovieList from "./pages/movielist/movielist.jsx";
+
+import MovieDetails from "./pages/info/info.jsx";
+
 import AnimeDetails from "./pages/info/info.jsx";
 import RankingCategory from "./pages/ranking/RankingCategory.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import FILMManagement from "./pages/admin/admin.jsx";
+
 
 function App() {
 
@@ -41,10 +45,14 @@ function App() {
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
-        <Route path='/info' element={<AnimeDetails></AnimeDetails>} />
-        <Route path="/film/:id" element={<AnimeDetails />} />
+
+        <Route path='/info/:id' element={<MovieDetails></MovieDetails>} />
+        {/* <Route path='/info' element={<DefaultLayout><MovieDetails></MovieDetails></DefaultLayout>} /> */}
+
+
         <Route path="/ranking" element={<RankingCategory />} />
       
+
 
       </Routes>
   )

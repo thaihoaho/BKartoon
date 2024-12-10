@@ -29,7 +29,6 @@ const App = () => {
     setBackgroundIndex(index);
   };
 
-  // Lọc lấy 9 phim đầu tiên
   const firstNineMovies = movies.slice(0, 9);
 
   return (
