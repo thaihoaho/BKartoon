@@ -3,13 +3,15 @@
   align-items: center;
   background: linear-gradient(45deg, #333, #555);
   padding: 10px 20px;
-  width: 90%;
+  width: 97%;
 }
 
 .logo {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffcc00; 
+  background: linear-gradient(45deg, #ff6600, #ffcc00);
+  -webkit-background-clip: text;
+  color: transparent;
   margin-right: auto;
 }
 
@@ -49,7 +51,7 @@
   background-color: transparent;
   color: #fff;
   font-size: 1.1rem;
-  border: 2px solid #ff6600;
+  border: 2px solid #ff660085;
   padding: 8px 16px;
   border-radius: 6px;
   cursor: pointer;

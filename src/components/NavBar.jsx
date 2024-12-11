@@ -12,7 +12,6 @@ const NavBar = () => {
     navigate(path); 
   };
   const handleLogout = () => {
-    // Add your logout logic here
     localStorage.removeItem('user'); // Remove user data from local storage
     navigate('/signin/user'); // Navigate to login page after logout
   };
@@ -28,7 +27,6 @@ const NavBar = () => {
       </ul>
       <button onClick={handleLogout} className={clx('logoutButton')}>
         <LogOut className={clx('logoutIcon')} />
-        Đăng xuất
       </button>
     </nav>
   );

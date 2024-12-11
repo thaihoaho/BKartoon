@@ -15,7 +15,8 @@ import MovieDetails from "./pages/info/info.jsx";
 import RankingCategory from "./pages/ranking/RankingCategory.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import FILMManagement from "./pages/admin/admin.jsx";
-
+import StudioList from "./pages/studio/studiolist.jsx";
+import Studio from "./pages/studio/studio.jsx";
 function App() {
 
   return (
@@ -41,13 +42,13 @@ function App() {
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
-        <Route path='/info/:id' element={<MovieDetails></MovieDetails>} />
+        <Route path='/info/:id' element={<DefaultLayout><MovieDetails/></DefaultLayout>} />
         {/* <Route path='/info' element={<DefaultLayout><MovieDetails></MovieDetails></DefaultLayout>} /> */}
         <Route path='/info' element={<MovieDetails></MovieDetails>} />
-        <Route path="/film/:id" element={<MovieDetails />} />
-        <Route path="/ranking" element={<RankingCategory />} />
-      
-
+        {/* <Route path="/film/:id" element={<DefaultLayout><MovieDetails/></DefaultLayout>} /> */}
+        <Route path="/ranking" element={<DefaultLayout><RankingCategory /></DefaultLayout>} />
+        <Route path="/studio" element={<DefaultLayout><StudioList/></DefaultLayout>} />
+        <Route path="/studio/:id" element={<DefaultLayout><Studio/></DefaultLayout>} />
       </Routes>
   )
 }

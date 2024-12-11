@@ -22,10 +22,9 @@ const MovieList = () => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            // Parse JSON thay vì text
+           
             const data = await response.json();
             console.log("Parsed response JSON:", data);
-
 
             const moviesWithPoster = data.map((movie) => ({
                 id: movie.FILM_ID, 
@@ -38,8 +37,7 @@ const MovieList = () => {
             console.error("Error fetching movies:", error);
         }
     };
-
-        fetchMovies();
+    fetchMovies();
     }, []);
 
     const handleSearchChange = (event) => {
@@ -49,11 +47,6 @@ const MovieList = () => {
     const filteredMovies = movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchQuery)
     );
-
-    const handleCardClick = (movieId) => {
-        console.log("nav");
-        navigate(`/info/26`);
-    };
 
     return (
         <div className={clx("wrap")}>
@@ -70,7 +63,6 @@ const MovieList = () => {
                 {filteredMovies.map((movie, index) => (
                     <MovieCard key={movie.id} movie={movie} isFeatured={index === 0} 
                     onclick={() => handleCardClick(movie.id)}/>
-                    
                 ))}
             </div>
         </div>
