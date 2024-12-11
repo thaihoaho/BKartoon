@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { Heart, HeartOff } from 'lucide-react';
-import styles from './buttonfollower.module.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Heart, HeartOff } from "lucide-react";
+import styles from "./buttonfollower.module.css";
 
 const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
   const [isLoading, setIsLoading] = useState(false);
 
   // Lấy sharer_id từ localStorage
-  const sharerId = JSON.parse(localStorage.getItem('user'))?.id;
+  const sharerId = JSON.parse(localStorage.getItem("user"))?.id;
 
   // Lấy shared_id từ URL
   const getSharedId = () => {
-    const pathParts = window.location.pathname.split('/');
+    const pathParts = window.location.pathname.split("/");
     return pathParts[pathParts.length - 1]; // ID của trang profile
   };
 
@@ -31,17 +31,20 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
 
   const handleFollow = async () => {
     if (!sharerId) {
-      console.error('User is not logged in.');
+      console.error("User is not logged in.");
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await axios.post('http://127.0.0.1:8000/api/toggle-follow', {
-        sharer_id: sharedId, // ID của tài khoản hiện tại
-        shared_id: sharerId, // ID của trang profile (lấy từ URL)
-        fav_id: listId, // listId của nút hiện tại
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/toggle-follow",
+        {
+          sharer_id: sharedId, // ID của tài khoản hiện tại
+          shared_id: sharerId, // ID của trang profile (lấy từ URL)
+          fav_id: listId, // listId của nút hiện tại
+        }
+      );
 
       const { error, message } = response.data;
       if (!error) {
@@ -59,7 +62,7 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
         console.error(message);
       }
     } catch (error) {
-      console.error('Error toggling follow status:', error);
+      console.error("Error toggling follow status:", error);
     } finally {
       setIsLoading(false);
     }
@@ -67,7 +70,9 @@ const FollowButton = ({ listId, initialIsFollowing, onFollowChange }) => {
 
   return (
     <button
-      className={`${styles['follow-button']} ${isFollowing ? styles.following : ''}`}
+      className={`${styles["follow-button"]} ${
+        isFollowing ? styles.following : ""
+      }`}
       onClick={handleFollow}
       disabled={isLoading}
     >
