@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import classNames from "classnames/bind";
 import styles from "./home.module.css";
+import posterMapping2 from "./mapping2";
+import testimg from '../../assets/test.jpg';
 const clx = classNames.bind(styles);
+
+
 
 const App = () => {
   const [theme, setTheme] = useState("dark");
@@ -23,22 +27,27 @@ const App = () => {
   ];
 
   useEffect(() => {
-    // Fetch dữ liệu từ API
-    fetch("http://127.0.0.1:8000/api/HotFilms", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ month: 12, year: 2024, min_average: 8 }),
+  // Lấy tháng và năm hiện tại
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1; // getMonth() trả về giá trị từ 0-11
+  const currentYear = currentDate.getFullYear();
+
+  // Fetch dữ liệu từ API
+  fetch("http://127.0.0.1:8000/api/HotFilms", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ month: currentMonth, year: currentYear, min_average: 8 }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (!data.error) {
+        setMovies(data.data);
+      }
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (!data.error) {
-          setMovies(data.data);
-        }
-      })
-      .catch((error) => console.error("Error fetching movies:", error));
-  }, []);
+    .catch((error) => console.error("Error fetching movies:", error));
+}, []);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "light" ? "dark" : "light"));
@@ -71,7 +80,7 @@ const App = () => {
             color: theme === "dark" ? "#fff" : "#000",
           }}
         >
-          Phim hot tháng này
+          <h1 className={clx("title-main")}>Phim hot tháng này</h1>
         </h1>
         <h2
           style={{
@@ -79,55 +88,54 @@ const App = () => {
             color: theme === "dark" ? "#fff" : "#000",
           }}
         >
-          Danh sách hot tháng này
+          <h2 className={clx("title-sub")}>Danh sách hot tháng này</h2>
         </h2>
         <div className={clx("carousel")}>
-          {movies.map((movie, index) => (
-            <div
-              key={movie.FILM_ID}
-              className={clx("movie", {
-                featured: movie.FILM_ID === featuredMovie,
-              })}
-              onMouseOver={() => {
-                setFeaturedMovie(movie.FILM_ID);
-                handleImageClick(index);
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  top: "5px",
-                  left: "5px",
-                  backgroundColor: "rgba(0, 0, 0, 0.6)",
-                  color: "#fff",
-                  borderRadius: "3px",
-                  padding: "4px 8px",
-                  fontSize: "18px",
-                  fontWeight: "bold",
-                }}
-              >
-                {index + 1}
-              </span>
-              <img
-                src={backgroundImages[index % backgroundImages.length]}
-                alt={movie.FILM_Title}
-                className={clx("movie-poster")}
-              />
-              <p
-                className={clx("movie-title")}
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  width: "100%",
-                  textAlign: "center",
-                }}
-              >
-                {movie.FILM_Title}
-              </p>
-            </div>
-          ))}
-        </div>
+  {movies.map((movie) => (
+    <div
+      key={movie.FILM_ID}
+      className={clx("movie", {
+        featured: movie.FILM_ID === featuredMovie,
+      })}
+      onMouseOver={() => {
+        setFeaturedMovie(movie.FILM_ID);
+      }}
+    >
+      <span
+        style={{
+          position: "absolute",
+          top: "5px",
+          left: "5px",
+          backgroundColor: "rgba(0, 0, 0, 0.6)",
+          color: "#fff",
+          borderRadius: "3px",
+          padding: "4px 8px",
+          fontSize: "18px",
+          fontWeight: "bold",
+        }}
+      >
+        {movie.FILM_ID}
+      </span>
+      <img
+        src={posterMapping2[movie.FILM_ID] || testimg} // Dùng ảnh mặc định nếu không tìm thấy ID
+        alt={movie.FILM_Title}
+        className={clx("movie-poster")}
+      />
+      <p
+        className={clx("movie-title")}
+        style={{
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          width: "100%",
+          textAlign: "center",
+        }}
+      >
+        {movie.FILM_Title}
+      </p>
+    </div>
+  ))}
+</div>
       </div>
     </div>
   );

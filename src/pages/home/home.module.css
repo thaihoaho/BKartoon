@@ -145,3 +145,36 @@
 .carousel::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.2); /* Subtle track */
 }
+
+.title-main {
+  font-size: 3rem;
+  /* Kích thước chữ lớn */
+  font-weight: bold;
+  /* Chữ đậm */
+  margin-bottom: 1rem;
+  /* Khoảng cách phía dưới */
+  text-transform: uppercase;
+  /* Viết hoa tất cả chữ */
+  letter-spacing: 2px;
+  /* Khoảng cách giữa các chữ */
+  color: #ffcc00;
+  /* Màu vàng nổi bật */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  /* Đổ bóng chữ */
+}
+
+.title-sub {
+  font-size: 2rem;
+  /* Kích thước chữ nhỏ hơn */
+  font-weight: 500;
+  /* Chữ đậm vừa */
+  margin-bottom: 2rem;
+  /* Khoảng cách phía dưới lớn hơn */
+  color: #ffffff;
+  /* Màu trắng */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  /* Đổ bóng chữ nhẹ */
+  text-align: center;
+  /* Canh giữa chữ */
+  font-style: italic;
+}
