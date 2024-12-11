@@ -219,7 +219,7 @@ export default function MovieDetails() {
                 </div>
               </div>
 
-              {showRatingForm && <RatingForm onClose={() => setShowRatingForm(false)} />}
+              {showRatingForm && <RatingForm filmId={idx} onClose={() => setShowRatingForm(false)} />}
             </div>
           </div>
         </div>
