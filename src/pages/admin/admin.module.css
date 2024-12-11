@@ -196,3 +196,15 @@ th:nth-child(4) {
         overflow-x: auto;
     }
 }
+
+
+.movie-title-link {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.movie-title-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

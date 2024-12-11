@@ -14,11 +14,10 @@ import MovieList from "./pages/movielist/movielist.jsx";
 
 import MovieDetails from "./pages/info/info.jsx";
 
-import AnimeDetails from "./pages/info/info.jsx";
 import RankingCategory from "./pages/ranking/RankingCategory.jsx";
 import Profile from "./pages/profile/profile.jsx";
 import FILMManagement from "./pages/admin/admin.jsx";
-
+import MovieDetails1 from "./pages/infoAdmin/infoadmin.jsx";
 
 function App() {
 
@@ -45,10 +44,10 @@ function App() {
         <Route path='/config' element={<FilmManagementLayout></FilmManagementLayout>} />
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
-
+        
         <Route path='/info/:id' element={<MovieDetails></MovieDetails>} />
         {/* <Route path='/info' element={<DefaultLayout><MovieDetails></MovieDetails></DefaultLayout>} /> */}
-
+        <Route path='/infoadmin/:id' element={<MovieDetails1></MovieDetails1>} />
 
         <Route path="/ranking" element={<RankingCategory />} />
       

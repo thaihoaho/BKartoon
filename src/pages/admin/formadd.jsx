@@ -40,7 +40,7 @@ const AddFilmModal = ({ isOpen, onClose }) => {
     releaseDate: formData.filmType === 'LE' ? formData.movieReleaseDay || null : null,
     episodes: formData.filmType === 'BO' ? formData.seriesEpisodes || null : null, // Bắt buộc set null nếu không phải 'BO'
   };
-
+    console.log("payload", payload);
     try {
       const response = await fetch('http://127.0.0.1:8000/api/addfilm2', {
         method: 'POST',
@@ -52,12 +52,11 @@ const AddFilmModal = ({ isOpen, onClose }) => {
       console.log("response", response);
       console.log("payload", payload);
 
-      if (!response.ok) {
-        throw new Error('Lỗi khi thêm phim. Vui lòng thử lại.');
-      }
+
+
 
       const result = await response.json();
-
+      
       if (result.error) {
         throw new Error(result.message);
       }
@@ -91,7 +90,6 @@ const AddFilmModal = ({ isOpen, onClose }) => {
               name="filmTitle"
               value={formData.filmTitle}
               onChange={handleChange}
-              required
             />
           </div>
           <div className={cx('form-group')}>
@@ -101,7 +99,6 @@ const AddFilmModal = ({ isOpen, onClose }) => {
               name="filmDescription"
               value={formData.filmDescription}
               onChange={handleChange}
-              required
             />
           </div>
           <div className={cx('form-group')}>

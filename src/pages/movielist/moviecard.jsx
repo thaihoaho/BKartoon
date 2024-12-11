@@ -27,6 +27,7 @@ const MovieCard = ({ movie, isFeatured, onclick }) => {
       </div>
       </div>
       </Link>
+    </div>
   );
 };
 

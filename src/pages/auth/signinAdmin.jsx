@@ -24,7 +24,7 @@ const LoginAdmin = () => {
       // Kiểm tra role trước khi điều hướng
       const role = response.data.user.role;
       if (role === 'admin') {
-        navigate('/config'); // Điều hướng đến trang quản lý admin
+        navigate('/admin'); // Điều hướng đến trang quản lý admin
       } else {
         alert('Bạn không có quyền truy cập vào trang này!');
       }

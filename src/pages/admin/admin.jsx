@@ -2,15 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Pencil, Trash2, Search, ArrowUpDown } from 'lucide-react';
 import { DropdownMenu } from '../../components/DropDown-Menu/DropdownMenu';
 import AddFilmModal from './formadd';
+import FormUpdate from './formupdate'; // Import FormUpdate
 import styles from './admin.module.css';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const FILMManagement = () => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [movies, setMovies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedFilm, setSelectedFilm] = useState(null); // Store selected film for editing
 
   // Fetch films from the API when the component mounts
   useEffect(() => {
@@ -38,15 +42,14 @@ const FILMManagement = () => {
 
     try {
       const response = await fetch('http://127.0.0.1:8000/api/deletefilm', {
-        method: 'DELETE', 
+        method: 'DELETE',
         headers: {
-          'Content-Type': 'application/json', // Ensure you're sending JSON
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ filmId }), // Send the filmId in the body as JSON
+        body: JSON.stringify({ filmId }),
       });
 
       if (response.ok) {
-        // Remove the deleted film from the UI
         setMovies((prevMovies) => prevMovies.filter(movie => movie.FILM_ID !== filmId));
       } else {
         console.error('Failed to delete film:', response.statusText);
@@ -56,9 +59,10 @@ const FILMManagement = () => {
     }
   };
 
-  const handleAddFilm = (filmData) => {
-    console.log('Thêm phim mới:', filmData);
-    setIsAddModalOpen(false);
+  // Open the edit modal with selected film
+  const handleEditFilm = (film) => {
+    setSelectedFilm(film); // Set selected film for editing
+    setIsEditModalOpen(true);
   };
 
   return (
@@ -112,6 +116,11 @@ const FILMManagement = () => {
           <tbody>
             {movies.map((movie) => (
               <tr key={movie.FILM_ID}>
+                <td>
+                  <Link to={`/infoadmin/${movie.FILM_ID}`} className={cx('movie-title-link')}>
+                    {movie.FILM_Title}
+                  </Link>
+                </td>
                 <td>{movie.FILM_Title}</td>
                 <td title={movie.FILM_Description}>
                   {movie.FILM_Description.length > 50
@@ -124,12 +133,15 @@ const FILMManagement = () => {
                 </td>
                 <td>
                   <div className={cx('action-buttons')}>
-                    <button className={cx('action-btn', 'edit')}>
+                    <button
+                      className={cx('action-btn', 'edit')}
+                      onClick={() => handleEditFilm(movie)} // Open edit modal
+                    >
                       <Pencil size={16} />
                     </button>
                     <button
                       className={cx('action-btn', 'delete')}
-                      onClick={() => handleDeleteFilm(movie.FILM_ID)} // Add the delete handler here
+                      onClick={() => handleDeleteFilm(movie.FILM_ID)}
                     >
                       <Trash2 size={16} />
                     </button>
@@ -141,11 +153,21 @@ const FILMManagement = () => {
         </table>
       </div>
 
+      {/* Add Film Modal */}
       <AddFilmModal
         isOpen={isAddModalOpen}
         onClose={() => setIsAddModalOpen(false)}
-        onSubmit={handleAddFilm}
+        onSubmit={() => {}}
       />
+
+      {/* Edit Film Modal */}
+      {isEditModalOpen && (
+        <FormUpdate
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          initialData={selectedFilm} // Pass selected film data
+        />
+      )}
     </div>
   );
 };
