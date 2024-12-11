@@ -1,5 +1,5 @@
-import { Img } from 'react-image';
-import styles from './ratingview.module.css';
+import { Img } from "react-image";
+import styles from "./ratingview.module.css";
 
 export default function ReviewCard({ review }) {
   return (
@@ -21,9 +21,7 @@ export default function ReviewCard({ review }) {
         <div className={styles.date}>{review.date}</div>
       </div>
 
-      <div className={styles.content}>
-        {review.comment}
-      </div>
+      <div className={styles.content}>{review.comment}</div>
     </div>
-  )
+  );
 }
