@@ -10,22 +10,24 @@
   margin: 10px;
   transition: transform 0.3s ease;
   height: 200px;
-  width : 130px;
+  width: 130px;
 }
-
 
 .movie-card:hover {
   transform: scale(1.23);
+  z-index: 1;
 }
 
 .movie-poster {
+  width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 
 .movie-info {
   position: absolute;
   bottom: 0;
-  left: 0;  
+  left: 0;
   right: 0;
   background: rgba(0, 0, 0, 0.8);
   color: white;
@@ -42,12 +44,22 @@
 }
 
 .movie-title {
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .movie-year {
   color: #ccc;
   font-size: 0.9rem;
   margin: 5px 0 0;
+}
+
+.movie-card-link {
+  text-decoration: none;
+  color: inherit;
 }

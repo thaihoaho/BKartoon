@@ -1,12 +1,14 @@
-import { useState, useEffect } from 'react'
-import { Img } from 'react-image'
+import { useState, useEffect } from 'react';
+import { Img } from 'react-image';
 import classNames from 'classnames/bind';
-import styles from './info.module.css'
-import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react'
-import RatingForm from './ratingform'
-import { Flame } from 'lucide-react'
-import { useLocation, useParams } from 'react-router-dom';
-
+import styles from './info.module.css';
+import { Star, Clock, Calendar, Film, User, Award } from 'lucide-react';
+import RatingForm from './ratingform';
+import { Flame } from 'lucide-react';
+import posterMapping from '../movielist/mapping';
+import defaultPoster from '../../assets/default.jpg';
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -16,47 +18,9 @@ export default function MovieDetails() {
   const idx = pathname.split('/')[2];
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [showRatingForm, setShowRatingForm] = useState(false)
-  const [average, setAverage] = useState(0);  const { id } = useParams();
-
-  const characters = [
-    {
-      character: {
-        name: "Ayase, Momo",
-        role: "Main",
-        image: "src/assets/user.png"
-      },
-      actor: {
-        name: "Wakayama, Shion",
-        language: "Japanese",
-        image: "src/assets/user.png"
-      }
-    },
-    {
-      character: {
-        name: "Takakura, Ken",
-        role: "Main",
-        image: "src/assets/user.png"
-      },
-      actor: {
-        name: "Hanae, Natsuki",
-        language: "Japanese",
-        image: "src/assets/user.png"
-      }
-    },
-    {
-      character: {
-        name: "Shiratori, Aira",
-        role: "Supporting",
-        image: "src/assets/user.png"
-      },
-      actor: {
-        name: "Sakura, Ayane",
-        language: "Japanese",
-        image: "src/assets/user.png"
-      }
-    }
-  ]
+  const [showRatingForm, setShowRatingForm] = useState(false);
+  const [average, setAverage] = useState(0);
+  const { id } = useParams();
   const [info, setInfo] = useState();
 
   useEffect(() => {
@@ -98,12 +62,14 @@ export default function MovieDetails() {
       </div>
     );
 
+  const posterSrc = posterMapping[idx] || defaultPoster;
+
   return (
     <div className={cx('container')}>
       <div className={cx('content')}>
         <div className={cx('posterSection')}>
           <Img
-            src="src/assets/conan.jpg"
+            src={posterSrc}
             alt="Movie Poster"
             width={300}
             height={450}
@@ -135,24 +101,22 @@ export default function MovieDetails() {
           </div>
 
           <div className={cx('metadata')}>
-            <div className={cx('metaItem')}>             
-              {info.FILM_Type == 'LE' ? <span><Clock className={cx('icon')} />{info.movie.MOV_Duration}p</span> : ''}
+            <div className={cx('metaItem')}>
+              {info.FILM_Type === 'LE' ? <span><Clock className={cx('icon')} />{info.movie.MOV_Duration}p</span> : ''}
             </div>
-            <div className={cx('metaItem')}>             
-              {info.FILM_Type == 'LE' ? <span><Calendar className={cx('icon')} />{info.movie.MOV_Release_day}</span> : ''}
+            <div className={cx('metaItem')}>
+              {info.FILM_Type === 'LE' ? <span><Calendar className={cx('icon')} />{info.movie.MOV_Release_day}</span> : ''}
             </div>
             <div className={cx('metaItem')}>
               <Film className={cx('icon')} />
-              <span>{info.FILM_Type == 'LE' ? 'Movie' : 'Series'}</span>
+              <span>{info.FILM_Type === 'LE' ? 'Movie' : 'Series'}</span>
             </div>
           </div>
 
           <div className={cx('charactersSection')}>
             <div className={cx('synopsis')}>
-              <h2>Decription</h2>
-              <p>
-                {info.FILM_Description}
-              </p>
+              <h2>Description</h2>
+              <p>{info.FILM_Description}</p>
             </div>
           </div>
 
@@ -166,33 +130,35 @@ export default function MovieDetails() {
                       {[director.FName, director.MName, director.LName]
                         .filter(Boolean)
                         .join(' ')}
-                      {(index > 0) ? ',' : ''}
+                      {index > 0 ? ',' : ''}
                     </span>
                   ))}
-
                 </div>
                 <div className={cx('detailItem')}>
                   <h3><Award className={cx('icon')} /> Studio</h3>
                   {info.studio.map((studio, index) => (
                     <span key={index}>
                       {studio.STU_Name}
-                      {(index > 0) ? ',' : ''}
+                      {index > 0 ? ',' : ''}
                     </span>
                   ))}
                 </div>
               </div>
               <div className={cx('detailsColumn')}>
                 <div className={cx('detailItem')}>
-                  {info.FILM_Type == 'BO' &&
-                    <div> <h3>Status</h3>
+                  {info.FILM_Type === 'BO' &&
+                    <div>
+                      <h3>Status</h3>
                       <p>{info.series.ser_status.Status}</p>
                     </div>
                   }
                 </div>
                 <div className={cx('detailItem')}>
-                  {info.FILM_Type == 'BO' &&
-                    <div><h3>Episodes</h3>
-                      <p>{info.series.SER_Number_of_episodes}</p></div>
+                  {info.FILM_Type === 'BO' &&
+                    <div>
+                      <h3>Episodes</h3>
+                      <p>{info.series.SER_Number_of_episodes}</p>
+                    </div>
                   }
                 </div>
               </div>
@@ -205,28 +171,16 @@ export default function MovieDetails() {
               {info.character.map((item, index) => (
                 <div key={index} className={cx('characterItem')}>
                   <div className={cx('characterInfo')}>
-                    {/* <Img
-                      src={item.character.image}
-                      alt={item.character.name}
-                      className={cx('characterImage')}
-                    /> */}
                     <div className={cx('characterText')}>
-                      <h4 >{item.CHA_Name}</h4>
+                      <h4>{item.CHA_Name}</h4>
                     </div>
                   </div>
                   <div className={cx('actorInfo')}>
-                    {item.voice_actors.map((actor) => (
-                      <div className={cx('actorText')}>
+                    {item.voice_actors.map((actor, index) => (
+                      <div key={index} className={cx('actorText')}>
                         <h4>{actor.FName}</h4>
                       </div>
                     ))}
-
-                    {/* <Img
-                      src={item.actor.image}
-                      alt={item.actor.name}
-                      className={cx('actorImage')}
-                    /> */}
-                    
                   </div>
                 </div>
               ))}
@@ -248,30 +202,28 @@ export default function MovieDetails() {
               <div className={cx('reviewsList')}>
                 <div className={cx('featuredReview')}>
                   <div className={cx('reviewTag')}>FEATURED REVIEW</div>
-                  {
-                    info.rating.map((rate) => (
-                      <div>
-                        <span className={cx('name')}>
-                          {rate.USER_Username}
-                          {' '}
-                          <span className={cx('point')}>{rate.Point}</span>
-                          {' '}
-                          <Star className={cx('starIcon')} />
-                        </span>
-                        <p className={cx('reviewContent')}>
-                          {rate.Comment}
-                        </p>
-                      </div>
-                    ))}
+                  {info.rating.map((rate, index) => (
+                    <div key={index}>
+                      <span className={cx('name')}>
+                        {rate.USER_Username}
+                        {' '}
+                        <span className={cx('point')}>{rate.Point}</span>
+                        {' '}
+                        <Star className={cx('starIcon')} />
+                      </span>
+                      <p className={cx('reviewContent')}>
+                        {rate.Comment}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {showRatingForm && <RatingForm onClose={() => setShowRatingForm(false)} />}
+              {showRatingForm && <RatingForm filmId={idx} onClose={() => setShowRatingForm(false)} />}
             </div>
           </div>
         </div>
       </div>
-
     </div>
-  )
+  );
 }

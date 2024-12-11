@@ -173,3 +173,13 @@
 .scrollableContent::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
 }
+
+.error-message {
+    color: #ff6666;
+    margin-bottom: 20px;
+}
+
+.success-message {
+    color: #ff6666;
+    margin-bottom: 20px;
+}
