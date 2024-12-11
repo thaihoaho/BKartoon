@@ -1,18 +1,16 @@
-
 import { useNavigate } from "react-router-dom";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import MovieCard from "./moviecard.jsx";
 import classNames from "classnames/bind";
 import styles from "./movielist.module.css";
-// import movies from "../../sample.jsx";
-const clx = classNames.bind(styles);
 import posterMapping from "./mapping.jsx";
 import defaultPoster from "../../assets/default.jpg";
+
+const clx = classNames.bind(styles);
 
 const MovieList = () => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
-
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
@@ -22,7 +20,6 @@ const MovieList = () => {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        // Parse JSON thay vì text
         const data = await response.json();
         console.log("Parsed response JSON:", data);
 
@@ -50,8 +47,8 @@ const MovieList = () => {
   );
 
   const handleCardClick = (movieId) => {
-    console.log("nav");
-    navigate(`/info/26`);
+    console.log("Navigating to movie:", movieId);
+    navigate(`/info/${movieId}`);
   };
 
   return (
