@@ -52,7 +52,7 @@ export default function RatingForm({ onClose, filmId }) {
       }
 
       // Xử lý thông báo thành công
-      setSuccessMessage("Đánh giá của bạn đã được gửi!");
+      setSuccessMessage(data.message || "Đánh giá của bạn đã được gửi!");
       setErrorMessage("");
       setRating(0); // Reset rating
       setReview(""); // Reset review
@@ -116,6 +116,7 @@ export default function RatingForm({ onClose, filmId }) {
 
           {/* Hiển thị lỗi hoặc thành công */}
           {errorMessage && <p className={cx("error-message")}>{errorMessage}</p>}
+
           {successMessage && <p className={cx("success-message")}>{successMessage}</p>}
 
           {/* Nút submit */}
