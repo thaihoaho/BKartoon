@@ -18,8 +18,6 @@ const FormDirector = ({ isOpen, onClose, onSubmit, filmId }) => {
   const [error, setError] = useState(null);
   const [directors, setDirectors] = useState();
 
-  const [dateError, setDateError] = useState(null); 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -40,7 +38,7 @@ const FormDirector = ({ isOpen, onClose, onSubmit, filmId }) => {
     const selectedDirector = directors.find(
       (studio) => studio.Name === selectedName
     );
-    
+
     setFormData((prev) => ({
       ...prev,
       directorName: selectedName,
@@ -82,37 +80,31 @@ const FormDirector = ({ isOpen, onClose, onSubmit, filmId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (dateError) {
-      alert(dateError);
-      return;
-    }
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/adddirect', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const response = await fetch('http://127.0.0.1:8000/api/adddirect', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const result = await response.json();
+    const result = await response.json();
 
-      if (result.error) {
-        throw new Error(result.message || 'Error adding a director.');
-      }
+    if (result.success) {
       alert('A director added successfully!');
       const returnDirect = {
-        DIC_ID : formData.DIC_ID,
-        FName : formData.directorName,
+        DIC_ID: formData.DIC_ID,
+        FName: formData.directorName,
       }
       onSubmit(returnDirect);
       setLoading(false);
-      onClose();   
-    } catch (err) {
-      setError(err.message || 'Error occurred. Please try again.');
+      onClose();
+    } else {
+      setLoading(false);
+      setError(result.error);
     }
     console.log(formData);
   };
@@ -183,7 +175,6 @@ const FormDirector = ({ isOpen, onClose, onSubmit, filmId }) => {
           </div>
 
           {error && <p className={cx('error-message')}>{error}</p>}
-          {dateError && <p className={cx('error-message')}>{dateError}</p>}
 
           <div className={cx('form-actions')}>
             <button type="button" className={cx('cancel-button')} onClick={onClose}>

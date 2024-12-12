@@ -9,7 +9,7 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
   const [formData, setFormData] = useState({
     FILM_ID: filmId || '',
     STU_ID: '',
-    studioName:'',
+    studioName: '',
     START_DATE: '',
     END_DATE: '',
     BUDGET: '',
@@ -18,9 +18,6 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [studios, setstudios] = useState();
-
-  const [dateError, setDateError] = useState(null); 
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -44,8 +41,13 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
 
     setFormData((prev) => ({
       ...prev,
-      STU_ID: selectedStudio.STU_ID,
       studioName: selectedName,
+    }));
+
+    if (selectedStudio)
+    setFormData((prev) => ({
+      ...prev,
+      STU_ID: selectedStudio.STU_ID,
     }));
   };
 
@@ -78,42 +80,32 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (dateError) {
-      alert(dateError);
-      return;
-    }
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/addproduce', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const response = await fetch('http://127.0.0.1:8000/api/addproduce', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
 
-      const result = await response.json();
-
-      if (result.error) {
-        throw new Error(result.message || 'Error adding a studio.');
-      }
-
+    const result = await response.json();
+    if (result.success) {
       alert('A studio added successfully!');
       const returnStudio = {
         STU_ID: formData.STU_ID,
         STU_Name: formData.studioName,
       }
       onSubmit(returnStudio);
-      onClose();
-    } catch (err) {
-      setError(err.message || 'Error occurred. Please try again.');
-    } finally {
       setLoading(false);
+      onClose();
+    } else {
+      setLoading(false);
+      setError(result.error);
     }
-
-    console.log(JSON.stringify(formData));
+    console.log(formData);
   };
 
   if (!isOpen) return null;
@@ -168,7 +160,7 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
               onChange={handleChange}
             />
           </div>
-                
+
           <div className={cx('form-group')}>
             <label htmlFor="FILM_ID">Budget</label>
             <input
@@ -193,7 +185,6 @@ const FormStudio = ({ isOpen, onClose, onSubmit, filmId }) => {
           </div>
 
           {error && <p className={cx('error-message')}>{error}</p>}
-          {dateError && <p className={cx('error-message')}>{dateError}</p>}
 
           <div className={cx('form-actions')}>
             <button type="button" className={cx('cancel-button')} onClick={onClose}>
