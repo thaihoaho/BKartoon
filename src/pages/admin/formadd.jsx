@@ -134,7 +134,6 @@ const AddFilmModal = ({ isOpen, onClose }) => {
                   name="movieReleaseDay"
                   value={formData.movieReleaseDay}
                   onChange={handleChange}
-                  required
                 />
               </div>
             </>

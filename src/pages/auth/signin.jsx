@@ -29,7 +29,7 @@ const Login = () => {
     // Kiểm tra role và điều hướng phù hợp
     const role = response.data.user.role;
     if (role === 'admin') {
-      navigate('/config'); // Điều hướng đến trang admin
+      navigate('/admin'); // Điều hướng đến trang admin
     } else {
       navigate('/home'); // Điều hướng đến trang user
     }
