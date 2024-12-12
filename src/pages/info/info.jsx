@@ -39,10 +39,7 @@ export default function MovieDetails() {
           setError(data.message || 'Failed to fetch data');
         } else {
           setInfo(data);
-          const ratings = data.rating;
-          const averageRating = ratings.reduce((sum, rate) => sum + parseFloat(rate.Point), 0) / ratings.length;
-          console.log(averageRating);
-          setAverage(averageRating.toFixed(2));
+          setAverage(data.averageRating.toFixed(2));
         }
       } catch (error) {
         console.error('Error fetching infos:', error);
@@ -156,6 +153,7 @@ export default function MovieDetails() {
                 <div className={cx('detailItem')}>
                   {info.FILM_Type === 'BO' &&
                     <div>
+                  
                       <h3>Episodes</h3>
                       <p>{info.series.SER_Number_of_episodes}</p>
                     </div>
