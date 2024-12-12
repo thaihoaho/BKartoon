@@ -24,6 +24,7 @@ const App = () => {
     "src/assets/inside-out.jpg", // Đường dẫn ảnh nền 8
     "src/assets/ralph.jpg", // Đường dẫn ảnh nền 9
     "src/assets/beauty-and-beast.jpg", // Đường dẫn ảnh nền 10
+    '../../assets/test.jpg',
   ];
 
   useEffect(() => {

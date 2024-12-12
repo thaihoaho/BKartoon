@@ -34,8 +34,7 @@ export default function MovieDetails() {
         });
 
         const data = await response.json();
-        console.log(data);
-        console.log(data.FILM_Ratinglevel);
+
         if (!response.ok) {
           setError(data.message || 'Failed to fetch data');
         } else {
@@ -45,14 +44,17 @@ export default function MovieDetails() {
       } catch (error) {
         console.error('Error fetching infos:', error);
         setError('An error occurred while fetching the data.');
-      } finally {
-        setLoading(false);
-        console.log(info)
-      }
+      } 
     };
 
     fetchInfo();
   }, [idx]);
+
+  useEffect(() => {
+    if (info) {
+      setLoading(false);
+    }
+  }, [info]);
 
   if (loading)
     return (

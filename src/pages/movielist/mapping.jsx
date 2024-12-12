@@ -1,20 +1,25 @@
 import avatar from "../../assets/avatar.jpg";
 import frozen from "../../assets/frozen.jpg";
 import minions from "../../assets/minions.jpg";
-import doraemon from "../../assets/doraemon.jpg";
-
+import naruto from "../../assets/naruto.jpg";
+import lionling from "../../assets/the-lion-king-poster.jpg";
+import coco from "../../assets/coco-poster.jpg";
+import doraemon from '../../assets/doreamon-poster.jpg';
+import bighero from '../../assets/big-hero-6-poster.jpg';
+import clannad from '../../assets/clannad.jpg';
+import test from '../../assets/test.jpg';
 
 const posterMapping = {
-    1: avatar, // id 1: poster cho phim Conan
-    2: frozen, // id 2: poster cho phim Naruto
-    3: minions, // id 3: poster cho phim One Piece
-    4: doraemon,
-    5: doraemon,
+    1: lionling, // id 1: poster cho phim Conan
+    2: naruto, // id 2: poster cho phim Naruto
+    3: bighero, // id 3: poster cho phim One Piece
+    4: test,
+    5: test,
     6: doraemon,
-    7: doraemon,
-    8: doraemon,
-    9: doraemon,
-    10: avatar,
+    7: clannad,
+    8: test,
+    9: test,
+    10: test,
     11: avatar,
     12: avatar,
     13: avatar,
