@@ -146,6 +146,8 @@
 }
 
 .detailItem {
+    width: 700px;
+    height: auto;
     margin-bottom: 20px;
 }
 
@@ -156,6 +158,20 @@
     font-size: 1.1rem;
     color: #ffcc00;
     margin-bottom: 8px;
+}
+
+.directors div {
+    width: 140px;
+    padding: 10px;
+    font-size: 1rem;
+    background: rgba(27, 27, 27, 0.418);
+    border-radius: 10px;
+}
+
+.directors {
+    display:flex;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .detailItem p {
@@ -385,6 +401,7 @@
     background-color: #ff6600;
     color: white;
     border: none;
+    margin-top: 30px;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;

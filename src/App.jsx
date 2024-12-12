@@ -47,20 +47,11 @@ function App() {
         <Route path='/config/addfilm' element={<AddFilmPage></AddFilmPage>} />
         <Route path='/config/updatefilm' element={<UpdateFilmPage></UpdateFilmPage>} />
         <Route path='/info/:id' element={<DefaultLayout><MovieDetails/></DefaultLayout>} />
-        
-        <Route path='/info/:id' element={<MovieDetails></MovieDetails>} />
-        {/* <Route path='/info' element={<DefaultLayout><MovieDetails></MovieDetails></DefaultLayout>} /> */}
-        <Route path='/info' element={<MovieDetails></MovieDetails>} />
-        {/* <Route path="/film/:id" element={<DefaultLayout><MovieDetails/></DefaultLayout>} /> */}
         <Route path="/ranking" element={<DefaultLayout><RankingCategory /></DefaultLayout>} />
         <Route path="/studio" element={<DefaultLayout><StudioList/></DefaultLayout>} />
         <Route path="/studio/:id" element={<DefaultLayout><Studio/></DefaultLayout>} />
         <Route path='/infoadmin/:id' element={<MovieDetails1></MovieDetails1>} />
-
         <Route path="/ranking" element={<RankingCategory />} />
-      
-
-
       </Routes>
   )
 }

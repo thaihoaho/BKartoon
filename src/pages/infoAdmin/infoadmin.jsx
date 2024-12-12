@@ -8,6 +8,9 @@ import posterMapping from '../movielist/mapping';
 import defaultPoster from '../../assets/default.jpg';
 import FormAddCategory from './formcategory';
 import FormAddCharacter from './formcharacter';
+import FormDirector from './formdirector';
+import FormStudio from './formStudio';
+
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +23,8 @@ export default function MovieDetails1() {
   const [info, setInfo] = useState();
   const [isAddCategoryFormOpen, setIsAddCategoryFormOpen] = useState(false);
   const [isAddCharacterFormOpen, setIsAddCharacterFormOpen] = useState(false);
+  const [isAddDirectorFormOpen, setIsAddDirectorFormOpen] = useState(false);
+  const [isAddStudioFormOpen, setIsAddStudioFormOpen] = useState(false);
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -57,13 +62,11 @@ export default function MovieDetails1() {
   };
 
   const handleAddDirector = () => {
-    // Logic to add a new director
-    alert('Add new director functionality here');
+    setIsAddDirectorFormOpen(true);
   };
 
   const handleAddStudio = () => {
-    // Logic to add a new studio
-    alert('Add new studio functionality here');
+    setIsAddStudioFormOpen(true);
   };
 
   if (loading)
@@ -139,13 +142,15 @@ export default function MovieDetails1() {
                 <h3>
                   <User className={cx('icon')} /> Director
                 </h3>
+                <div className={cx('directors')}>
                 {info.film_directories.map((director, index) => (
-                  <span key={index}>
+                  <div key={index}>
                     {[director.FName, director.MName, director.LName]
                       .filter(Boolean)
                       .join(' ')}
-                  </span>
+                  </div>
                 ))}
+                </div>
                 <button className={cx('addButton')} onClick={handleAddDirector}>
                   <Plus /> Add
                 </button>
@@ -154,9 +159,11 @@ export default function MovieDetails1() {
                 <h3>
                   <Award className={cx('icon')} /> Studio
                 </h3>
+                <div className={cx('directors')}>
                 {info.studio.map((studio, index) => (
-                  <span key={index}>{studio.STU_Name}</span>
+                  <div key={index}>{studio.STU_Name}</div>
                 ))}
+                </div>
                 <button className={cx('addButton')} onClick={handleAddStudio}>
                   <Plus /> Add
                 </button>
@@ -202,6 +209,7 @@ export default function MovieDetails1() {
           </div>
         </div>
       </div>
+
       <FormAddCategory
         isOpen={isAddCategoryFormOpen}
         onClose={() => setIsAddCategoryFormOpen(false)}
@@ -222,6 +230,33 @@ export default function MovieDetails1() {
           setInfo(prevInfo => ({
             ...prevInfo,
             character: [...prevInfo.character, newCharacter]
+          }));
+
+        }}
+        filmId={idx}
+      />
+
+      <FormDirector
+        isOpen={isAddDirectorFormOpen}
+        onClose={() => setIsAddDirectorFormOpen(false)}
+        onSubmit={(newDirector) => {
+          setInfo(prevInfo => ({
+            ...prevInfo,
+            film_directories: [...prevInfo.film_directories, newDirector]
+          }));
+
+          console.log(info)
+        }}       
+        filmId={idx}
+      />
+
+      <FormStudio
+        isOpen={isAddStudioFormOpen}
+        onClose={() => setIsAddStudioFormOpen(false)}
+        onSubmit={(newStudio) => {
+          setInfo(prevInfo => ({
+            ...prevInfo,
+            studio: [...prevInfo.studio, newStudio]
           }));
         }}
         filmId={idx}
